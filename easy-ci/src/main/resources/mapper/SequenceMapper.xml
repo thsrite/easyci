@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easyci.ci.dao.SequenceMapper">
+  <resultMap id="BaseResultMap" type="com.easyci.ci.entity.Sequence">
+    <id column="name" jdbcType="VARCHAR" property="name" />
+    <result column="current_value" jdbcType="INTEGER" property="current_value" />
+    <result column="increment" jdbcType="INTEGER" property="increment" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    name, current_value, increment
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sequence
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <select id="selectCurrentVal" parameterType="java.lang.String" resultType="java.lang.Integer">
+    SELECT CURRVAL(#{name});
+  </select>
+  <select id="selectNextVal" parameterType="java.lang.String" resultType="java.lang.Integer">
+    SELECT NEXTVAL(#{name});
+  </select>
+  <select id="setNextVal" parameterType="java.lang.String">
+    SELECT SETVAL(#{name}, #{nextval});
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sequence
+    where name = #{name,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.easyci.ci.entity.Sequence">
+    insert into sequence (name, current_value, increment
+      )
+    values (#{name,jdbcType=VARCHAR}, #{current_value,jdbcType=INTEGER}, #{increment,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.easyci.ci.entity.Sequence">
+    insert into sequence
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="current_value != null">
+        current_value,
+      </if>
+      <if test="increment != null">
+        increment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="current_value != null">
+        #{current_value,jdbcType=INTEGER},
+      </if>
+      <if test="increment != null">
+        #{increment,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.easyci.ci.entity.Sequence">
+    update sequence
+    <set>
+      <if test="current_value != null">
+        current_value = #{current_value,jdbcType=INTEGER},
+      </if>
+      <if test="increment != null">
+        increment = #{increment,jdbcType=INTEGER},
+      </if>
+    </set>
+    where name = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.easyci.ci.entity.Sequence">
+    update sequence
+    set current_value = #{current_value,jdbcType=INTEGER},
+      increment = #{increment,jdbcType=INTEGER}
+    where name = #{name,jdbcType=VARCHAR}
+  </update>
+</mapper>

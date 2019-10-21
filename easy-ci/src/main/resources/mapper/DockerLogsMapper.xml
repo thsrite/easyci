@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easyci.ci.dao.DockerLogsMapper">
+  <resultMap id="BaseResultMap" type="com.easyci.ci.entity.DockerLogs">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="docker_name" jdbcType="VARCHAR" property="docker_name" />
+    <result column="docker_logs" jdbcType="VARCHAR" property="docker_logs" />
+    <result column="logs_num" jdbcType="INTEGER" property="logs_num" />
+    <result column="logs_path" jdbcType="VARCHAR" property="logs_path" />
+    <result column="deploy_ip" jdbcType="VARCHAR" property="deploy_ip" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, docker_name, docker_logs, logs_num, logs_path, deploy_ip
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from docker_logs
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectBy" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from docker_logs
+    where docker_name = #{docker_name} and deploy_ip = #{deploy_ip}
+  </select>
+  <delete id="deleteBy" parameterType="java.lang.String">
+    delete from docker_logs
+    where docker_name = #{docker_name} and deploy_ip = #{deploy_ip}
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from docker_logs
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.easyci.ci.entity.DockerLogs">
+    insert into docker_logs (id, docker_name, docker_logs,
+      logs_num, logs_path, deploy_ip
+      )
+    values (#{id,jdbcType=INTEGER}, #{docker_name,jdbcType=VARCHAR}, #{docker_logs,jdbcType=VARCHAR},
+      #{logs_num,jdbcType=INTEGER}, #{logs_path,jdbcType=VARCHAR}, #{deploy_ip,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.easyci.ci.entity.DockerLogs">
+    insert into docker_logs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="docker_name != null">
+        docker_name,
+      </if>
+      <if test="docker_logs != null">
+        docker_logs,
+      </if>
+      <if test="logs_num != null">
+        logs_num,
+      </if>
+      <if test="logs_path != null">
+        logs_path,
+      </if>
+      <if test="deploy_ip != null">
+        deploy_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="docker_name != null">
+        #{docker_name,jdbcType=VARCHAR},
+      </if>
+      <if test="docker_logs != null">
+        #{docker_logs,jdbcType=VARCHAR},
+      </if>
+      <if test="logs_num != null">
+        #{logs_num,jdbcType=INTEGER},
+      </if>
+      <if test="logs_path != null">
+        #{logs_path,jdbcType=VARCHAR},
+      </if>
+      <if test="deploy_ip != null">
+        #{deploy_ip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.easyci.ci.entity.DockerLogs">
+    update docker_logs
+    <set>
+      <if test="docker_name != null">
+        docker_name = #{docker_name,jdbcType=VARCHAR},
+      </if>
+      <if test="docker_logs != null">
+        docker_logs = #{docker_logs,jdbcType=VARCHAR},
+      </if>
+      <if test="logs_num != null">
+        logs_num = #{logs_num,jdbcType=INTEGER},
+      </if>
+      <if test="logs_path != null">
+        logs_path = #{logs_path,jdbcType=VARCHAR},
+      </if>
+      <if test="deploy_ip != null">
+        deploy_ip = #{deploy_ip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.easyci.ci.entity.DockerLogs">
+    update docker_logs
+    set docker_name = #{docker_name,jdbcType=VARCHAR},
+      docker_logs = #{docker_logs,jdbcType=VARCHAR},
+      logs_num = #{logs_num,jdbcType=INTEGER},
+      logs_path = #{logs_path,jdbcType=VARCHAR},
+      deploy_ip = #{deploy_ip,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

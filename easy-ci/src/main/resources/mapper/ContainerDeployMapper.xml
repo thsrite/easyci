@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easyci.ci.dao.ContainerDeployMapper">
+  <resultMap id="BaseResultMap" type="com.easyci.ci.entity.ContainerDeploy">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="container_name" jdbcType="VARCHAR" property="container_name" />
+    <result column="giturl" jdbcType="VARCHAR" property="giturl" />
+    <result column="ports" jdbcType="VARCHAR" property="ports" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="mails" jdbcType="VARCHAR" property="mails" />
+    <result column="docker_hub" jdbcType="VARCHAR" property="docker_hub" />
+    <result column="deploy_ip" jdbcType="VARCHAR" property="deploy_ip" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, container_name, giturl, ports, language, mails, docker_hub, deploy_ip
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from container_deploy
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByConName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    *
+    from container_deploy
+    where container_name = #{container_name}
+  </select>
+  <select id="selectByNameAndIp" parameterType="java.lang.String" resultType="com.easyci.ci.entity.ContainerDeploy">
+    select
+    <include refid="Base_Column_List" />
+    from container_deploy
+    where container_name = #{container_name}
+    and deploy_ip = #{deploy_ip}
+  </select>
+  <delete id="deleteBy" parameterType="java.lang.String">
+    delete from container_deploy
+    where container_name = #{container_name} and deploy_ip = #{deploy_ip}
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from container_deploy
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.easyci.ci.entity.ContainerDeploy">
+    insert into container_deploy (id, container_name, giturl, 
+      ports, language, mails, 
+      docker_hub, deploy_ip)
+    values (#{id,jdbcType=INTEGER}, #{container_name,jdbcType=VARCHAR}, #{giturl,jdbcType=VARCHAR}, 
+      #{ports,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{mails,jdbcType=VARCHAR}, 
+      #{docker_hub,jdbcType=VARCHAR}, #{deploy_ip,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.easyci.ci.entity.ContainerDeploy">
+    insert into container_deploy
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="container_name != null">
+        container_name,
+      </if>
+      <if test="giturl != null">
+        giturl,
+      </if>
+      <if test="ports != null">
+        ports,
+      </if>
+      <if test="language != null">
+        language,
+      </if>
+      <if test="mails != null">
+        mails,
+      </if>
+      <if test="docker_hub != null">
+        docker_hub,
+      </if>
+      <if test="deploy_ip != null">
+        deploy_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="container_name != null">
+        #{container_name,jdbcType=VARCHAR},
+      </if>
+      <if test="giturl != null">
+        #{giturl,jdbcType=VARCHAR},
+      </if>
+      <if test="ports != null">
+        #{ports,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="mails != null">
+        #{mails,jdbcType=VARCHAR},
+      </if>
+      <if test="docker_hub != null">
+        #{docker_hub,jdbcType=VARCHAR},
+      </if>
+      <if test="deploy_ip != null">
+        #{deploy_ip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.easyci.ci.entity.ContainerDeploy">
+    update container_deploy
+    <set>
+      <if test="container_name != null">
+        container_name = #{container_name,jdbcType=VARCHAR},
+      </if>
+      <if test="giturl != null">
+        giturl = #{giturl,jdbcType=VARCHAR},
+      </if>
+      <if test="ports != null">
+        ports = #{ports,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="mails != null">
+        mails = #{mails,jdbcType=VARCHAR},
+      </if>
+      <if test="docker_hub != null">
+        docker_hub = #{docker_hub,jdbcType=VARCHAR},
+      </if>
+      <if test="deploy_ip != null">
+        deploy_ip = #{deploy_ip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.easyci.ci.entity.ContainerDeploy">
+    update container_deploy
+    set container_name = #{container_name,jdbcType=VARCHAR},
+      giturl = #{giturl,jdbcType=VARCHAR},
+      ports = #{ports,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      mails = #{mails,jdbcType=VARCHAR},
+      docker_hub = #{docker_hub,jdbcType=VARCHAR},
+      deploy_ip = #{deploy_ip,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

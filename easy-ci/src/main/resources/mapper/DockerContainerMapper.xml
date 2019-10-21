@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easyci.ci.dao.DockerContainerMapper">
+  <resultMap id="BaseResultMap" type="com.easyci.ci.entity.DockerContainer">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="container_id" jdbcType="VARCHAR" property="container_id" />
+    <result column="image_name" jdbcType="VARCHAR" property="image_name" />
+    <result column="command" jdbcType="VARCHAR" property="command" />
+    <result column="created" jdbcType="VARCHAR" property="created" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="ports" jdbcType="VARCHAR" property="ports" />
+    <result column="container_name" jdbcType="VARCHAR" property="container_name" />
+    <result column="server_ip" jdbcType="VARCHAR" property="server_ip" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, container_id, image_name, command, created, status, ports, container_name, server_ip
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from docker_container
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from docker_container
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.easyci.ci.entity.DockerContainer">
+    insert into docker_container (id, container_id, image_name, 
+      command, created, status, 
+      ports, container_name, server_ip
+      )
+    values (#{id,jdbcType=INTEGER}, #{container_id,jdbcType=VARCHAR}, #{image_name,jdbcType=VARCHAR}, 
+      #{command,jdbcType=VARCHAR}, #{created,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{ports,jdbcType=VARCHAR}, #{container_name,jdbcType=VARCHAR}, #{server_ip,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.easyci.ci.entity.DockerContainer">
+    insert into docker_container
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="container_id != null">
+        container_id,
+      </if>
+      <if test="image_name != null">
+        image_name,
+      </if>
+      <if test="command != null">
+        command,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="ports != null">
+        ports,
+      </if>
+      <if test="container_name != null">
+        container_name,
+      </if>
+      <if test="server_ip != null">
+        server_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="container_id != null">
+        #{container_id,jdbcType=VARCHAR},
+      </if>
+      <if test="image_name != null">
+        #{image_name,jdbcType=VARCHAR},
+      </if>
+      <if test="command != null">
+        #{command,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="ports != null">
+        #{ports,jdbcType=VARCHAR},
+      </if>
+      <if test="container_name != null">
+        #{container_name,jdbcType=VARCHAR},
+      </if>
+      <if test="server_ip != null">
+        #{server_ip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.easyci.ci.entity.DockerContainer">
+    update docker_container
+    <set>
+      <if test="container_id != null">
+        container_id = #{container_id,jdbcType=VARCHAR},
+      </if>
+      <if test="image_name != null">
+        image_name = #{image_name,jdbcType=VARCHAR},
+      </if>
+      <if test="command != null">
+        command = #{command,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="ports != null">
+        ports = #{ports,jdbcType=VARCHAR},
+      </if>
+      <if test="container_name != null">
+        container_name = #{container_name,jdbcType=VARCHAR},
+      </if>
+      <if test="server_ip != null">
+        server_ip = #{server_ip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.easyci.ci.entity.DockerContainer">
+    update docker_container
+    set container_id = #{container_id,jdbcType=VARCHAR},
+      image_name = #{image_name,jdbcType=VARCHAR},
+      command = #{command,jdbcType=VARCHAR},
+      created = #{created,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      ports = #{ports,jdbcType=VARCHAR},
+      container_name = #{container_name,jdbcType=VARCHAR},
+      server_ip = #{server_ip,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easyci.ci.dao.DockerServerMapper">
+  <resultMap id="BaseResultMap" type="com.easyci.ci.entity.DockerServer">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="server_ip" jdbcType="VARCHAR" property="server_ip" />
+    <result column="server_port" jdbcType="VARCHAR" property="server_port" />
+    <result column="server_username" jdbcType="VARCHAR" property="server_username" />
+    <result column="server_password" jdbcType="VARCHAR" property="server_password" />
+    <result column="is_local" javaType="INTEGER" property="is_local"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, server_ip, server_port, server_username, server_password, is_local
+  </sql>
+  <select id="selectSearchServer" resultMap="BaseResultMap">
+    select id,server_ip from docker_server
+  </select>
+  <select id="selectDeployServer" resultMap="BaseResultMap">
+    select id,server_ip from docker_server where is_local = 0
+  </select>
+  <select id="selectLocalServer" resultMap="BaseResultMap">
+    select * from docker_server where is_local = 1
+  </select>
+  <select id="selectServers" resultMap="BaseResultMap">
+    select * from docker_server
+  </select>
+  <select id="selectByDockerServer" parameterType="com.easyci.ci.entity.DockerServer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from docker_server
+    where 1=1
+    <if test="id != null">
+      and id = #{id}
+    </if>
+    <if test="server_ip != null">
+      and server_ip = #{server_ip,jdbcType=VARCHAR}
+    </if>
+    <if test="server_port != null">
+      and server_port = #{server_port,jdbcType=VARCHAR}
+    </if>
+    <if test="server_username != null">
+      and server_username = #{server_username,jdbcType=VARCHAR}
+    </if>
+    <if test="server_password != null">
+      and server_password = #{server_password,jdbcType=VARCHAR}
+    </if>
+    <if test="is_local != null">
+      and is_local = #{is_local}
+    </if>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from docker_server
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.easyci.ci.entity.DockerServer">
+    insert into docker_server (id, server_ip, server_port,
+      server_username, server_password,is_local)
+    values (#{id,jdbcType=INTEGER}, #{server_ip,jdbcType=VARCHAR}, #{server_port,jdbcType=VARCHAR},
+      #{server_username,jdbcType=VARCHAR}, #{server_password,jdbcType=VARCHAR},#{is_local})
+  </insert>
+  <insert id="insertSelective" parameterType="com.easyci.ci.entity.DockerServer">
+    insert into docker_server
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="server_ip != null">
+        server_ip,
+      </if>
+      <if test="server_port != null">
+        server_port,
+      </if>
+      <if test="server_username != null">
+        server_username,
+      </if>
+      <if test="server_password != null">
+        server_password,
+      </if>
+      <if test="is_local != null">
+        is_local,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="server_ip != null">
+        #{server_ip,jdbcType=VARCHAR},
+      </if>
+      <if test="server_port != null">
+        #{server_port,jdbcType=VARCHAR},
+      </if>
+      <if test="server_username != null">
+        #{server_username,jdbcType=VARCHAR},
+      </if>
+      <if test="server_password != null">
+        #{server_password,jdbcType=VARCHAR},
+      </if>
+      <if test="is_local != null">
+        #{is_local},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.easyci.ci.entity.DockerServer">
+    update docker_server
+    <set>
+      <if test="server_ip != null">
+        server_ip = #{server_ip,jdbcType=VARCHAR},
+      </if>
+      <if test="server_port != null">
+        server_port = #{server_port,jdbcType=VARCHAR},
+      </if>
+      <if test="server_username != null">
+        server_username = #{server_username,jdbcType=VARCHAR},
+      </if>
+      <if test="server_password != null">
+        server_password = #{server_password,jdbcType=VARCHAR},
+      </if>
+      <if test="is_local != null">
+        is_local = #{is_local},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.easyci.ci.entity.DockerServer">
+    update docker_server
+    set server_ip = #{server_ip,jdbcType=VARCHAR},
+      server_port = #{server_port,jdbcType=VARCHAR},
+      server_username = #{server_username,jdbcType=VARCHAR},
+      server_password = #{server_password,jdbcType=VARCHAR},
+      is_local = #{is_local}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
