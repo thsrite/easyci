@@ -409,7 +409,9 @@
               that.$message("开启自动刷新")
             }
             if (! that.isReSet && that.isDockerPsOne){
-              this.getOnePs();
+              if (that.serverid != null && that.serverid !== '') {
+                this.getOnePs();
+              }
               this.getLocalPs();
               that.freshnum += 1
             } else {
@@ -509,7 +511,9 @@
           }else {
             that.$message.success(response.data.errorDesc);
             if (that.isDockerPsOne){
-              that.getOnePs();
+              if (that.serverid != null && that.serverid !== '') {
+                that.getOnePs();
+              }
               that.getLocalPs();
             } else {
               that.getDockerPs();
@@ -609,7 +613,9 @@
           if (response.data.status){
             that.$message.success(response.data.errorDesc);
             if (that.isDockerPsOne){
-              that.getOnePs();
+              if (that.serverid != null && that.serverid !== '') {
+                that.getOnePs();
+              }
               that.getLocalPs();
             } else {
               that.getDockerPs();
@@ -632,7 +638,9 @@
           if (response.data.status){
             that.$message.success(response.data.errorDesc);
             if (that.isDockerPsOne){
-              that.getOnePs();
+              if (that.serverid != null && that.serverid !== '') {
+                that.getOnePs();
+              }
               that.getLocalPs();
             } else {
               that.getDockerPs();
@@ -655,7 +663,9 @@
           if (response.data.status){
             that.$message.success(response.data.errorDesc);
             if (that.isDockerPsOne){
-              that.getOnePs();
+              if (that.serverid != null && that.serverid !== '') {
+                that.getOnePs();
+              }
               that.getLocalPs();
             } else {
               that.getDockerPs();
@@ -670,6 +680,7 @@
         this.startLoading("销毁中…")
         if (row.status === "Up"){
           that.$message.warning("请先停止容器！")
+          that.endLoading()
           return false;
         }else {
           this.axios.post('/api/docker/dockerExec', {
@@ -681,7 +692,9 @@
             if (response.data.status){
               that.$message.success(response.data.errorDesc);
               if (that.isDockerPsOne){
-                that.getOnePs();
+                if (that.serverid != null && that.serverid !== '') {
+                  that.getOnePs();
+                }
                 that.getLocalPs();
               } else {
                 that.getDockerPs();
