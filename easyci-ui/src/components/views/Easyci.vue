@@ -496,7 +496,7 @@
         that.textarea = ''
         setTimeout(function() {
           that.logs()
-        }, 2000)
+        }, 3000)
         this.axios.post('/api/docker/build', {
           giturl: this.giturl,
           ports: this.ports,
