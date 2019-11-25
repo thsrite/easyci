@@ -1,0 +1,426 @@
+﻿<h3>由于工作需要，这里我先创建一个vue的工程。</h3>
+<p>1.首先安装好gitlab相关插件：GitLab、GitLab&nbsp;Hook、NodeJS</p>
+<p>插件安装参考：<a href="https://www.cnblogs.com/jxd283465/p/11542680.html">https://www.cnblogs.com/jxd283465/p/11542680.html</a></p>
+<p>2.jenkins服务器安装git 和 nodejs</p>
+<p>git安装：</p>
+<ul>
+<li>yum -y install git</li>
+</ul>
+<p>nodejs安装：这里我安装的在home路径下，可自行更改。</p>
+<ul>
+<li>wget https://nodejs.org/dist/v9.8.0/node-v9.8.0-linux-x64.tar.xz</li>
+<li>tar -xvf node-v9.8.0-linux-x64.tar.xz</li>
+<li>mv node-v9.8.0-linux-x64 node</li>
+<li>sudo&nbsp; ln -s /home/node/bin/node /usr/local/bin/&nbsp; &nbsp; &nbsp;&nbsp;</li>
+<li>sudo&nbsp;ln -s /home/node/bin/npm /usr/local/bin/</li>
+<li>sudo ln -s /home/node/bin/node /usr/bin</li>
+</ul>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;">[root@localhost home]# node -v
+</span><span style="color: #008080;">2</span> v9.8.0</pre>
+</div>
+<p>3.配置jenkins全局工具,这里暂时配置git和nodejs</p>
+<p>点击&ldquo;系统管理&rdquo;------Global Tool Configuration</p>
+<p>git配置：yum安装完成后git路径为/usr/bin/git</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919094410482-1663749461.png" alt="" width="1127" height="219" /></p>
+<p>&nbsp;nodejs配置：这里选择安装路径为/home/node</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919094519742-1100483533.png" alt="" width="1146" height="228" /></p>
+<p>配置git和nodejs环境结束后点击保存。</p>
+<p>4.新建jenkins工程。</p>
+<p>由于这里建的是vue的自动化部署项目，所以新建一个FreeStyle project.</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919094717225-1539097201.png" alt="" /></p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919094908692-1306619599.png" alt="" width="1256" height="417" /></p>
+<p>&nbsp;由于这里使用的是git，需要加一个参数化构建。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919094951975-270841370.png" alt="" /></p>
+<p>这里，我后续会配置，工程构建成功后会打一个git的tag，作为备份。以防构建失败后无法回滚。</p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919095545651-72846667.png" alt="" /></p>
+<p>&nbsp;代码管理工具选择----&ldquo;git&rdquo;</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919095833365-1686222523.png" alt="" width="1106" height="372" /></p>
+<p>&nbsp;Repository URL：填写gitlab项目的git地址</p>
+<p>&nbsp;此处报错是因为要添加Credentials凭证。</p>
+<p>在jenkins的主机上执行</p>
+<p><code>ssh-keygen -t rsa -C "&lt;填写自己方便识别的注释&gt;" -b 4096</code>&nbsp; 没什么问题就执行三次空格。&nbsp;<br />三次问题是1.填入生成密钥对的路径名字。2 填入自定义passphrsa。3确认。&nbsp; </p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #000000;">[root@localhost home]# ssh-keygen -t rsa -C "********" -b 4096
+</span><span style="color: #008080;"> 2</span> <span style="color: #000000;">Generating public/private rsa key pair.
+</span><span style="color: #008080;"> 3</span> <span style="color: #000000;">Enter file in which to save the key (/root/.ssh/id_rsa): 
+</span><span style="color: #008080;"> 4</span> <span style="color: #000000;">Enter passphrase (empty for no passphrase): 
+</span><span style="color: #008080;"> 5</span> <span style="color: #000000;">Enter same passphrase again: 
+</span><span style="color: #008080;"> 6</span> <span style="color: #000000;">Your identification has been saved in /root/.ssh/id_rsa.
+</span><span style="color: #008080;"> 7</span> <span style="color: #000000;">Your public key has been saved in /root/.ssh/id_rsa.pub.
+</span><span style="color: #008080;"> 8</span> <span style="color: #000000;">The key fingerprint is:
+</span><span style="color: #008080;"> 9</span> <span style="color: #000000;">SHA256:oQYIN3KUkPmnCn0LrC25h5L0yVpiIvoHUgawDuyCKuE **************
+</span><span style="color: #008080;">10</span> <span style="color: #000000;">The key's randomart image is:
+</span><span style="color: #008080;">11</span> <span style="color: #000000;">+---[RSA 4096]----+
+</span><span style="color: #008080;">12</span> <span style="color: #000000;">|*==.             |
+</span><span style="color: #008080;">13</span> <span style="color: #000000;">|=*.o             |
+</span><span style="color: #008080;">14</span> <span style="color: #000000;">|o+. .   .        |
+</span><span style="color: #008080;">15</span> <span style="color: #000000;">|= + .. . .       |
+</span><span style="color: #008080;">16</span> <span style="color: #000000;">|+B o  o S        |
+</span><span style="color: #008080;">17</span> <span style="color: #000000;">|*o* ..           |
+</span><span style="color: #008080;">18</span> <span style="color: #000000;">|BEo=..           |
+</span><span style="color: #008080;">19</span> <span style="color: #000000;">|# =+o            |
+</span><span style="color: #008080;">20</span> <span style="color: #000000;">|+*o.             |
+</span><span style="color: #008080;">21</span> +----[SHA256]-----+</pre>
+</div>
+<p>生成的公钥和私钥在/root/.ssh目录下</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;">[root@localhost .ssh]# pwd
+</span><span style="color: #008080;">2</span> <span style="color: #000000;">/root/.ssh
+</span><span style="color: #008080;">3</span> <span style="color: #000000;">[root@localhost .ssh]# ls -l
+</span><span style="color: #008080;">4</span> <span style="color: #000000;">总用量 12
+</span><span style="color: #008080;">5</span> <span style="color: #000000;">-rw-------. 1 root root 3247 9月  19 10:00 id_rsa       #私钥
+</span><span style="color: #008080;">6</span> <span style="color: #000000;">-rw-r--r--. 1 root root  746 9月  19 10:00 id_rsa.pub   #公钥
+</span><span style="color: #008080;">7</span> -rw-r--r--. 1 root root  174 9月  18 16:58 known_hosts</pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #000000;"># 查看私钥
+</span><span style="color: #008080;"> 2</span> <span style="color: #000000;">[root@localhost .ssh]# cat id_rsa
+</span><span style="color: #008080;"> 3</span> <span style="color: #000000;">-----BEGIN RSA PRIVATE KEY-----
+</span><span style="color: #008080;"> 4</span> <span style="color: #000000;">MIIJKwIBAAKCAgEAtYMEUrqLRFVbBTXo89E8p+ci8N1ySimuuN1ShpODrVNEx89w
+</span><span style="color: #008080;"> 5</span> <span style="color: #000000;">9gs1w6IU4xveb9l4L5jJlTVeSGNq1HdPgTLlVDTgNWGQHxv94dT8XptPKcPC5NUN
+</span><span style="color: #008080;"> 6</span> <span style="color: #000000;">I5/eJmvtpJRdVWPYuavlGAR9nDLZYUmTgwaI9DbXeTUuB0oyTzsR3KvcWOUhxy2p
+</span><span style="color: #008080;"> 7</span> <span style="color: #000000;">L5Rmdc4n0+K4MPigq5lc5JCDvuJL6kjH3f1MI6VMSi5Jk+CrQWWYFq6PBCA6ZHV6
+</span><span style="color: #008080;"> 8</span> <span style="color: #000000;">OQTR8rk/xKgeTNXt1ZJxoI+0cHyH5vff9XffzKV1DbURu4a78rsWMRiXKSKvhZAV
+</span><span style="color: #008080;"> 9</span> <span style="color: #000000;">VrdPVMT50pSrYrRhal7sy4jh9ZNDQE69zNA9I3YjZ+9KFNKvjYXv3cqm0/zojcH8
+</span><span style="color: #008080;">10</span> <span style="color: #000000;">dAs2xuC9hU+oZcBxv2GrbH2I6aYKmCbjHIuUCYxAN+9bS7ok3krYqPLKvN2BU71b
+</span><span style="color: #008080;">11</span> <span style="color: #000000;">jlMi5ynW12o9AcMocuZFyZsjJfhq/0gBQvtXhnWckmt3beS5H/MKZuzt/+5yfjrm
+</span><span style="color: #008080;">12</span> <span style="color: #000000;">Drdw+38GnhvikKaMyhk7bbNvKJGLvXtxXhN3JHDtRM1ruKQs7bWDO64IQEm3c+1e
+</span><span style="color: #008080;">13</span> <span style="color: #000000;">pvc7e1qgs2LSFNmxY6lLpIygcqajka8/NTDT4+QxNXH0d76qIT/bXd72ffxFQHAy
+</span><span style="color: #008080;">14</span> <span style="color: #000000;">2pzKaUQjAo7T203EXJ4qSPcVxH0AACQ7BOfN8mQyWEVy8iEB8vkTz+j3wOUCAwEA
+</span><span style="color: #008080;">15</span> <span style="color: #000000;">AQKCAgEAj1UujMWSRBvDDJJNqnuIEm6LQPkdz0KrHoBnMq46RRyEK+S7pw+jHSFY
+</span><span style="color: #008080;">16</span> <span style="color: #000000;">rR7MwDZSmgNk69aA5Vjce3rb5YJzZdN7Wav5SxennDW8NFkgYjKcLGexQHh1zJFd
+</span><span style="color: #008080;">17</span> <span style="color: #000000;">z6D5Mvztn3EGL7kcF8RvtEuNmOIINBE6hhRgjJEiuT5EFKYCEpCd49NCzre5UT3C
+</span><span style="color: #008080;">18</span> <span style="color: #000000;">ZaebG9C5z8gDetpDrvC0UgW3Dq1++ocFf26d25CGq9W2C/M8LF3mvn2mTnBn+ewf
+</span><span style="color: #008080;">19</span> <span style="color: #000000;">VwQLKVGlxgkmgUv5iPpNty32RLismcXucSyTHCqBMGRcWdi5RVqGkEn/D8Mheicx
+</span><span style="color: #008080;">20</span> <span style="color: #000000;">wAB2djNK2dyr0O3+wRXQ/W8wohOusoWEjJywsOgGLuV5mIUz2gZOeirGVoy/k2WH
+</span><span style="color: #008080;">21</span> <span style="color: #000000;">bA2Cd5+TZGR4fjlDs0ezSiP9++cW8C8OqMnp/8gVMAzhnJ/EXVLTG+1+tl4LloaM
+</span><span style="color: #008080;">22</span> <span style="color: #000000;">ZrZU1mQWErAq2Crh27v71VJltnNUrTf5/qqjmiMjkWr5qt4CzCAzmXUzI+LDy0HK
+</span><span style="color: #008080;">23</span> <span style="color: #000000;">nLkKfsKWDafVFU+1gIEEuKMbVZ4xkzyxTFigwn7Wg5I1aEklyeIf28hjcVwUImyC
+</span><span style="color: #008080;">24</span> <span style="color: #000000;">gpnIbaYcziCFz04AJGUHohgBuRZOkDipnESK3U8djAhnX0hDOqlSzXkAzsBKc+bV
+</span><span style="color: #008080;">25</span> <span style="color: #000000;">zFLARmnzAOtnyPV1m+Ej5eAJuPQ+AaBGd155XETeLb3DeEQQtuECggEBANzGOZ4K
+</span><span style="color: #008080;">26</span> <span style="color: #000000;">VuG5n+OHuOa5vQExEfi/suzFof5UC2okBgzQq9a07Iran6Z7y/8j3XSaC4W9kMOf
+</span><span style="color: #008080;">27</span> <span style="color: #000000;">9ssXgQgDaUvgYFEPBlNUmLyzLOIud3tRnxTzO0RSNk1wWzCAWFLPYy7YkU1VkQoh
+</span><span style="color: #008080;">28</span> <span style="color: #000000;">MLUKUA0VPPGGZCVfVBHPS8ITlrz4fgI4HcSBqaUKWT+PPOwRk+XxneDd/4Zv/JPH
+</span><span style="color: #008080;">29</span> <span style="color: #000000;">7zrtgBvfGIcGSWrpp2UPvu4bkXXFBrX9hNNdDcKhR+uP43uCA0sHrC+W2deuPCnC
+</span><span style="color: #008080;">30</span> <span style="color: #000000;">m40PvnFHkW3EKJFJu+dTYSr64NIZRg5sM+X9mLgDi6Rmx56g0/ipt0cKMPwPnogK
+</span><span style="color: #008080;">31</span> <span style="color: #000000;">6rHqQKmGH+TQwPMCggEBANJ5EdGFAdh4IUJwYqF1+lJM/UOOWRrZnfQgfr1bgj01
+</span><span style="color: #008080;">32</span> <span style="color: #000000;">+KI1NdGCQtGUpS3XOnlho3Oy7uoa+OA6KSH6mTMedFYSEPFvIwiszmmEnS3nFpON
+</span><span style="color: #008080;">33</span> <span style="color: #000000;">jRSHTRJyc+N2OI6Q7NpUxQ19dwxmt6wInv4pSvK/7Pmh+gkNI84HzmQofRRd6jYI
+</span><span style="color: #008080;">34</span> <span style="color: #000000;">rAofILJY2whsnsLy/BqpC60/Odm6cmQtaQuvzJKyP6Vp9zsavXUDlidRIfMEueaK
+</span><span style="color: #008080;">35</span> <span style="color: #000000;">Nqa8K7KZMbXQ1LcQjM3BVxodpD9+MB55molOoD2UnpEGaAXkx0eouvlo+UiVbz1i
+</span><span style="color: #008080;">36</span> <span style="color: #000000;">6FB7PyMfm124S+2ZA9+Sna44NzPYhcLHMQFPm1JYLMcCggEBALYbwK0vZCk/v7ak
+</span><span style="color: #008080;">37</span> <span style="color: #000000;">Xo3bSh9whZ2FKycJgq1SUDQWUPNDMWuiw7dpzOU8GrJzuBmVc8m263GiQqWV1rZw
+</span><span style="color: #008080;">38</span> <span style="color: #000000;">cevHwks6tIIKNw74UR6lK6OKWUmjtRCPLAHGm0GvrKtqLCsZMwnyefg8FnxPbGbO
+</span><span style="color: #008080;">39</span> <span style="color: #000000;">TP4BWBxHvQYP0zLci6uG4hIcjdlpBzF/Ds1R7vPfL/styYgSNtODDnosIpaeD91t
+</span><span style="color: #008080;">40</span> <span style="color: #000000;">skK2mdrZr126lki8bskRY46891KN4GraNIQHpaJcRTEfvBVpPnodW70qrLq38ORq
+</span><span style="color: #008080;">41</span> <span style="color: #000000;">H3jGpJvrkVaoPW+Bj+9eL553/HtLKy0mp4pNyX18tjzYabjsnClfDOq07pEhZIMx
+</span><span style="color: #008080;">42</span> <span style="color: #000000;">gp9w3qcCggEBAKqV//Ad6lIFg4dyyS3uDhW4WqjvbZ7KdDASSka1LUjpPnxRvi3x
+</span><span style="color: #008080;">43</span> <span style="color: #000000;">crCk1n/h6n3Iug6jHurVM5Og8AefMZ3x9/5upBbaqb11OdLh7fbvTigHWSojQz9J
+</span><span style="color: #008080;">44</span> <span style="color: #000000;">Tk40WkCKi72laRS29M8zTXh8gEilNR6smaf2NU4yvStWvlwFSONB/vsOaknF0t1a
+</span><span style="color: #008080;">45</span> <span style="color: #000000;">ESSxzLda8yO0kUc4cG3cpKw29eXH9XmMSPOLgBsCYD2/y2pQYsCxuu50ZTkcWBpn
+</span><span style="color: #008080;">46</span> <span style="color: #000000;">+ZdQC6fYHRcCtdLv5ViksOFyU+Mnu85Nb3tBgvwL4cxdoDVXdHv0yfUp/fqE+bZA
+</span><span style="color: #008080;">47</span> <span style="color: #000000;">/s6l+bw4AaCqF2zGGU/HFRq6ESjr2YqS9q8CggEBAKAf57DZtm4W7uBDekaBvglJ
+</span><span style="color: #008080;">48</span> <span style="color: #000000;">ZBhF/h8UXNPsfePwFBM8u96taXN2noHrMSuMx59SSMfyQK/mpnaLXMyVPM3Scswl
+</span><span style="color: #008080;">49</span> <span style="color: #000000;">RT8MvtaPZAV08qTNc/AcUjFa2QrmTIU3TBOv8GNJCXnXbZTLewDwBW7xwcYApCSh
+</span><span style="color: #008080;">50</span> <span style="color: #000000;">ULSbB3RfByij3Vqhak6q2dFOE+6AhLVaHuuW6FKLb7NgioCVmzpIBJUSXfXiRH/S
+</span><span style="color: #008080;">51</span> <span style="color: #000000;">h35/TgVIoY95+pIFS/xi+Y2hFEDZcdvvKHlXxStYLAnUS1dMdPkcwnd+JiQ7RWhd
+</span><span style="color: #008080;">52</span> <span style="color: #000000;">vJ2dqnKaYK+Zqs1zXfqYLp1GFYvVZGAp67D6anoM7Rv7td+tHScSFfJzMETuclM=
+</span><span style="color: #008080;">53</span> <span style="color: #000000;">-----END RSA PRIVATE KEY-----
+</span><span style="color: #008080;">54</span> 
+<span style="color: #008080;">55</span> <span style="color: #000000;"># 查看公钥
+</span><span style="color: #008080;">56</span> <span style="color: #000000;">[root@localhost .ssh]# cat id_rsa.pub 
+</span><span style="color: #008080;">57</span> ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC1gwRSuotEVVsFNejz0Tyn5yLw3XJKKa643VKGk4OtU0THz3D2CzXDohTjG95v2XgvmMmVNV5IY2rUd0+BMuVUNOA1YZAfG/3h1Pxem08pw8Lk1Q0jn94ma+2klF1VY9i5q+UYBH2cMtlhSZODBoj0Ntd5NS4HSjJPOxHcq9xY5SHHLakvlGZ1zifT4rgw+KCrmVzkkIO+4kvqSMfd/UwjpUxKLkmT4KtBZZgWro8EIDpkdXo5BNHyuT/EqB5M1e3VknGgj7RwfIfm99/1d9/MpXUNtRG7hrvyuxYxGJcpIq+FkBVWt09UxPnSlKtitGFqXuzLiOH1k0NATr3M0D0jdiNn70oU0q+Nhe/dyqbT/OiNwfx0CzbG4L2FT6hlwHG/YatsfYjppgqYJuMci5QJjEA371tLuiTeStio8sq83YFTvVuOUyLnKdbXaj0Bwyhy5kXJmyMl+Gr/SAFC+1eGdZySa3dt5Lkf8wpm7O3/7nJ+OuYOt3D7fwaeG+KQpozKGTtts28okYu9e3FeE3ckcO1EzWu4pCzttYM7rghASbdz7V6m9zt7WqCzYtIU2bFjqUukjKBypqORrz81MNPj5DE1cfR3vqohP9td3vZ9/EVAcDLanMppRCMCjtPbTcRcnipI9xXEfQAAJDsE583yZDJYRXLyIQHy+RPP6PfA5Q== jiangxd@mingbyte.com</pre>
+</div>
+<p>jenkins中配置私钥：</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919101345002-1029245836.png" alt="" width="603" height="202" /></p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919101443323-1696901879.png" alt="" width="799" height="391" /></p>
+<p>&nbsp;gitlab中配置公钥：</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919101559268-1664137213.png" alt="" /></p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919101640756-1783682162.png" alt="" width="1147" height="518" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919101806566-1391417770.png" alt="" width="1095" height="208" /></p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919101907757-1754265447.png" alt="" width="1091" height="110" /></p>
+<p>&nbsp;这里 &ldquo;Branches to build&rdquo; 处为上文中参数化构建的Name，此处为$Tag,&ldquo;$&rdquo;表示调用变量。</p>
+<p>&nbsp;至此，jenkins整合gitlab完成。</p>
+<p>&nbsp;由于每次gitlab代码提交，都要发布jenkins很麻烦。所以这里使用gitlab hook自动触发，此处的webhook要复制。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919102126166-350435501.png" alt="" width="1229" height="704" /></p>
+<p>&nbsp;配置giltab相应项目的webhook</p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919102336281-2044858153.png" alt="" width="1123" height="562" /></p>
+<p>&nbsp;如果提交webhook报错 <span style="color: #ff0000;">url is blocked requist to the local network are not allowed。</span></p>
+<p>&nbsp;gitlab 10.6 版本以后为了安全，不允许向本地网络发送webhook请求，如果想向本地网络发送webhook请求，则需要使用管理员帐号登录，默认管理员帐号是admin@example.com，密码就是你gitlab搭建好之后第一次输入的密码，登录之后进行如下配置即可。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919102949873-139958356.png" alt="" width="1318" height="692" /></p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919103206604-977668430.png" alt="" /></p>
+<p>&nbsp;此处添加成功后，可以进行Test触发测试。这里我就不测试了。</p>
+<p>&nbsp;继续我们的jenkins工程创建。</p>
+<p>&nbsp;构建环境处由于这个工程是vue工程，这里选择node，此处的Node JS v9.8是上文中在全局工具中配置的。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919103322912-346483822.png" alt="" width="1112" height="507" /></p>
+<p>&nbsp;接下来，添加构建步骤。由于我需要打包docker容器，这里选择的是执行shell脚本。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919103446361-2112040385.png" alt="" /></p>
+<p>&nbsp;此处贴出shell脚本</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;"> # /home/jenkins/.jenkins/workspace为jenkins工作目录
+ # MingByteWeb为我jenkins创建的项目名称
+ cd /home/jenkins/.jenkins/workspace/MingByteWeb
+ # /home/jenkins/jenkins.sh这个脚本是我用于删除多余的tag和删除之前运行的容器
+ bash /home/jenkins/jenkins.sh 192.168.8.10:5000/mingbyteweb ming-byte-web
+ # 这里是vue打包 
+ echo '================vue打包================'
+ sudo /usr/local/bin/npm install
+ sudo /usr/local/bin/npm run build 
+ echo '================打包docker================'
+ # docker构建镜像
+ docker build -t 192.168.8.10:5000/mingbyteweb:latest .
+ echo '================开始推送镜像================'
+ # docker推送镜像到docker私服
+ sudo docker push 192.168.8.10:5000/mingbyteweb:latest 
+ echo '================结束推送镜像================'
+ # docker启动镜像
+ sudo docker run -d --name MingByteWeb -p:8081:8080 192.168.8.10:5000/mingbyteweb
+ echo "finished!" 
+ # 构建成功！</span></pre>
+</div>
+<p>jenkins.sh</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">t=`sudo docker ps | grep $1|awk '{print  $1}'|sed 's/%//g'`;
+b=``;
+if [ $t ];
+then
+sudo docker stop  $t
+echo "停止容器成功"
+sudo docker rm $t
+echo "删除容器成功"
+else
+echo "首次部署";
+fi
+
+tagnum=`git tag | wc -l`;
+tag=(`git tag`)
+a=0;
+echo $tagnum
+until [ $tagnum -lt 3 ]
+do
+   echo $a 删除tag：${tag[$a]}
+   git tag -d ${tag[$a]}
+   git push $2 :refs/tags/${tag[$a]}
+   a=`expr $a + 1`
+   tagnum=`expr $tagnum - 1`
+done</span></pre>
+</div>
+<p>构建项目:</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919120455063-657555145.png" alt="" /></p>
+<p>&nbsp;这里点击&ldquo;开始构建&rdquo;是直接拉取gitlab最新版的master分支代码。也可以选择tag构建。之后我会写构建生成tag的文稿。</p>
+<p>&nbsp;最后贴图构建成功的代码。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">Started by user admin
+Running as SYSTEM
+[EnvInject] - Loading node environment variables.
+Building in workspace /home/jenkins/.jenkins/workspace/MingByteWeb
+using credential 26e43bbc-407f-42ff-8865-41496cf12fe9
+ &gt; /usr/bin/git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ &gt; /usr/bin/git config remote.origin.url git@192.168.8.10:hxf/ming-byte-web.git # timeout=10
+Fetching upstream changes from git@192.168.8.10:hxf/ming-byte-web.git
+ &gt; /usr/bin/git --version # timeout=10
+using GIT_SSH to set credentials 
+ &gt; /usr/bin/git fetch --tags --progress git@192.168.8.10:hxf/ming-byte-web.git +refs/heads/*:refs/remotes/origin/*
+ &gt; /usr/bin/git rev-parse origin/master^{commit} # timeout=10
+Checking out Revision f94b7302025142f80aa671d6d3d1ffe0f5601807 (origin/master)
+ &gt; /usr/bin/git config core.sparsecheckout # timeout=10
+ &gt; /usr/bin/git checkout -f f94b7302025142f80aa671d6d3d1ffe0f5601807
+Commit message: "fix:修复接口baseUrl"
+ &gt; /usr/bin/git rev-list --no-walk f94b7302025142f80aa671d6d3d1ffe0f5601807 # timeout=10
+[MingByteWeb] $ /bin/sh -xe /home/tomcat/temp/jenkins2058141575534233786.sh
++ cd /home/jenkins/.jenkins/workspace/MingByteWeb
++ bash /home/jenkins/jenkins.sh 192.168.8.10:5000/mingbyteweb ming-byte-web
+首次部署
+3
+0 删除tag：rc_59
+已删除 tag 'rc_59'（曾为 40dc597）
+fatal: 'ming-byte-web' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
++ echo ================vue打包================
+================vue打包================
++ sudo /usr/local/bin/npm install
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.9 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.9: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+up to date in 8.204s
++ sudo /usr/local/bin/npm run build
+
+&gt; ming-byte@0.1.0 build /home/jenkins/.jenkins/workspace/MingByteWeb
+&gt; vue-cli-service build
+
+ WARN  "baseUrl" option in vue.config.js is deprecated now, please use "publicPath" instead.
+
+-  Building for production...
+ WARNING  Compiled with 2 warnings11:55:52
+
+ warning  
+
+asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  assets/img/en-jiao.bc226a6e.png (736 KiB)
+  assets/img/fzlc1.04b5a7d6.png (1.72 MiB)
+  assets/img/bg.10e66f2d.png (269 KiB)
+  assets/img/neng2.51572385.svg (708 KiB)
+  assets/img/aboutus-bg.24b126e4.png (3.06 MiB)
+  assets/img/homeImg.2d4c24fe.jpg (605 KiB)
+  assets/img/banner.d0de1296.png (877 KiB)
+  assets/img/en-hu.10ba4555.png (748 KiB)
+  assets/img/shuzi.0c4edbf4.png (2.82 MiB)
+  assets/img/en-jiao-bg.327842dc.png (352 KiB)
+  assets/img/banner.dc7b97a9.png (535 KiB)
+  assets/js/chunk-vendors.eabed4cd.js (826 KiB)
+
+ warning  
+
+entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  app (1.07 MiB)
+      assets/css/chunk-vendors.2921d934.css
+      assets/js/chunk-vendors.eabed4cd.js
+      assets/css/app.8be713f0.css
+      assets/js/app.a67be888.js
+
+
+  File                                      Size             Gzipped
+
+  dist/assets/js/chunk-vendors.eabed4cd.    825.72 KiB       222.24 KiB
+  js
+  dist/assets/js/about.1e94fa7f.js          30.84 KiB        8.89 KiB
+  dist/assets/js/app.a67be888.js            26.48 KiB        9.19 KiB
+  dist/assets/js/chunk-e4921c92.8eb56c35    5.43 KiB         2.13 KiB
+  .js
+  dist/assets/css/chunk-vendors.2921d934    228.07 KiB       34.52 KiB
+  .css
+  dist/assets/css/about.f15fe60f.css        16.90 KiB        8.56 KiB
+  dist/assets/css/app.8be713f0.css          10.34 KiB        4.10 KiB
+  dist/assets/css/chunk-e4921c92.9451e9f    2.12 KiB         0.83 KiB
+  4.css
+
+  Images and other types of assets omitted.
+
+ DONE  Build complete. The dist directory is ready to be deployed.
+ INFO  Check out deployment instructions at https://cli.vuejs.org/guide/deployment.html
+      
++ echo ================打包docker================
+================打包docker================
++ docker build -t 192.168.8.10:5000/mingbyteweb:latest .
+Sending build context to Docker daemon  323.8MB
+
+Step 1/6 : FROM nginx:1.15.5
+ ---&gt; dbfc48660aeb
+Step 2/6 : RUN rm /etc/nginx/conf.d/default.conf
+ ---&gt; Using cache
+ ---&gt; 6f887258cdf3
+Step 3/6 : ADD default.conf /etc/nginx/conf.d/
+ ---&gt; Using cache
+ ---&gt; b2292a96d1aa
+Step 4/6 : COPY ./dist /usr/share/nginx/html/
+ ---&gt; Using cache
+ ---&gt; 717db4eaf72a
+Step 5/6 : RUN chmod -R a+rx /usr/share/nginx/html/*
+ ---&gt; Using cache
+ ---&gt; fd948904b5d3
+Step 6/6 : CMD  nginx -g 'daemon off;'
+ ---&gt; Using cache
+ ---&gt; a58cefe00e53
+Successfully built a58cefe00e53
+Successfully tagged 192.168.8.10:5000/mingbyteweb:latest
++ echo ================开始推送镜像================
+================开始推送镜像================
++ sudo docker push 192.168.8.10:5000/mingbyteweb:latest
+The push refers to repository [192.168.8.10:5000/mingbyteweb]
+8121fdecba88: Preparing
+a44f0decdd50: Preparing
+e3de46667e06: Preparing
+38b7b8ba2bf9: Preparing
+86df2a1b653b: Preparing
+bc5b41ec0cfa: Preparing
+237472299760: Preparing
+bc5b41ec0cfa: Waiting
+237472299760: Waiting
+e3de46667e06: Pushed
+38b7b8ba2bf9: Pushed
+86df2a1b653b: Pushed
+a44f0decdd50: Pushed
+8121fdecba88: Pushed
+bc5b41ec0cfa: Pushed
+237472299760: Pushed
+latest: digest: sha256:3808b7955c70fee07e92e75cf59c4b1585b20651a1094d7f6382e0441797d969 size: 1786
++ echo ================结束推送镜像================
+================结束推送镜像================
++ sudo docker run -d --name MingByteWeb -p:8081:8080 192.168.8.10:5000/mingbyteweb
+6d6160bcf0d7d638ae58368d1760d47e3d2cc1d176aa282d31e859a26a1f36db
++ echo 'finished!'
+finished!
+Notifying upstream projects of job completion
+Finished: SUCCESS</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;最后注意gitlab这块有个问题。当提交代码到gitlab时，gitlab的webhook会触发jenkins自动构建。</p>
+<p>&nbsp;但是可能会构建失败。</p>
+<p>&nbsp;解决：jenkins的系统配置里面，将gitlab下的&ldquo;Enable authentication for '/project' end-point&rdquo;后面的&radic;去掉</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919121158394-25162584.png" alt="" width="993" height="349" />&nbsp;</p>
+<p>vue项目需要用到的配置文件：</p>
+<p>default.conf：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">server {
+    listen       7000;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+
+    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+    #
+    #location ~ \.php$ {
+    #    proxy_pass   http://127.0.0.1;
+    #}
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    #
+    #location ~ \.php$ {
+    #    root           html;
+    #    fastcgi_pass   127.0.0.1:9000;
+    #    fastcgi_index  index.php;
+    #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+    #    include        fastcgi_params;
+    #}
+
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
+    #location ~ /\.ht {
+    #    deny  all;
+    #}
+}</span></pre>
+</div>
+<p>Dockerfile：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">FROM nginx:1.15.5
+#dist到nginx部署
+RUN rm /etc/nginx/conf.d/default.conf
+#ADD
+ADD default.conf /etc/nginx/conf.d/
+COPY ./dist /usr/share/nginx/html/
+RUN chmod -R a+rx /usr/share/nginx/html/*
+CMD  nginx -g 'daemon off;'</span></pre>
+</div>
+<p>&nbsp;</p>
+<p><br />&nbsp;&nbsp;</p>

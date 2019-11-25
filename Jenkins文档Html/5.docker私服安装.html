@@ -1,0 +1,185 @@
+﻿<h1>前言</h1>
+<h3>系统环境：Centos7、jdk1.8</h3>
+<p>docker私服：可以把项目通过dockerfile文件build成docker镜像，供其他环境拉取。部署在本地，私有化。</p>
+<h1>安装</h1>
+<h2>dockerHUB私服</h2>
+<h3>1. 搭建registry</h3>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #000000;">#拉取registry镜像
+</span><span style="color: #008080;"> 2</span> <span style="color: #000000;">[root@localhost home]# docker pull registry
+</span><span style="color: #008080;"> 3</span> <span style="color: #000000;">Using default tag: latest
+</span><span style="color: #008080;"> 4</span> <span style="color: #000000;">latest: Pulling from library/registry
+</span><span style="color: #008080;"> 5</span> <span style="color: #000000;">c87736221ed0: Pull complete 
+</span><span style="color: #008080;"> 6</span> <span style="color: #000000;">1cc8e0bb44df: Pull complete 
+</span><span style="color: #008080;"> 7</span> <span style="color: #000000;">54d33bcb37f5: Pull complete 
+</span><span style="color: #008080;"> 8</span> <span style="color: #000000;">e8afc091c171: Pull complete 
+</span><span style="color: #008080;"> 9</span> <span style="color: #000000;">b4541f6d3db6: Pull complete 
+</span><span style="color: #008080;">10</span> <span style="color: #000000;">Digest: sha256:8004747f1e8cd820a148fb7499d71a76d45ff66bac6a29129bfdbfdc0154d146
+</span><span style="color: #008080;">11</span> <span style="color: #000000;">Status: Downloaded newer image for registry:latest
+</span><span style="color: #008080;">12</span> 
+<span style="color: #008080;">13</span> <span style="color: #000000;">#查看镜像
+</span><span style="color: #008080;">14</span> <span style="color: #000000;">[root@localhost home]# docker images
+</span><span style="color: #008080;">15</span> <span style="color: #000000;">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+</span><span style="color: #008080;">16</span> <span style="color: #000000;">registry            latest              f32a97de94e1        6 months ago        25.8MB
+</span><span style="color: #008080;">17</span> 
+<span style="color: #008080;">18</span> <span style="color: #000000;">#启动容器
+</span><span style="color: #008080;">19</span> <span style="color: #000000;">[root@localhost home]# docker run -d -v /data/registry:/var/lib/registry -p 5000:5000 --restart=always --name qdockerhub registry:latest
+</span><span style="color: #008080;">20</span> <span style="color: #000000;">67b0ac40561688b8bb874fa9674e44eb069cc6ee443127ba80b140ea51947af7
+</span><span style="color: #008080;">21</span> 
+<span style="color: #008080;">22</span> <span style="color: #000000;">#测试/v2/_catalog接口
+</span><span style="color: #008080;">23</span> <span style="color: #000000;">[root@localhost home]# curl http://127.0.0.1:5000/v2/_catalog
+</span><span style="color: #008080;">24</span> <span style="color: #000000;">{"repositories":[]}
+</span><span style="color: #008080;">25</span> [root@localhost home]# </pre>
+</div>
+<h3>2. 提交镜像</h3>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #000000;">#拉取tomcat测试提交
+</span><span style="color: #008080;"> 2</span> <span style="color: #000000;">[root@localhost home]# docker pull tomcat
+</span><span style="color: #008080;"> 3</span> <span style="color: #000000;">Using default tag: latest
+</span><span style="color: #008080;"> 4</span> <span style="color: #000000;">latest: Pulling from library/tomcat
+</span><span style="color: #008080;"> 5</span> <span style="color: #000000;">092586df9206: Pull complete 
+</span><span style="color: #008080;"> 6</span> <span style="color: #000000;">ef599477fae0: Pull complete 
+</span><span style="color: #008080;"> 7</span> <span style="color: #000000;">4530c6472b5d: Pull complete 
+</span><span style="color: #008080;"> 8</span> <span style="color: #000000;">d34d61487075: Pull complete 
+</span><span style="color: #008080;"> 9</span> <span style="color: #000000;">272f46008219: Pull complete 
+</span><span style="color: #008080;">10</span> <span style="color: #000000;">12ff6ccfe7a6: Pull complete 
+</span><span style="color: #008080;">11</span> <span style="color: #000000;">f26b99e1adb1: Pull complete 
+</span><span style="color: #008080;">12</span> <span style="color: #000000;">21bec9c8ea28: Pull complete 
+</span><span style="color: #008080;">13</span> <span style="color: #000000;">e2f6023231f2: Pull complete 
+</span><span style="color: #008080;">14</span> <span style="color: #000000;">c47eb491a5e3: Pull complete 
+</span><span style="color: #008080;">15</span> <span style="color: #000000;">Digest: sha256:74e52cc6d27dacb079b273c129d6bf32df6ba328d6508b81ef65f41675ae9570
+</span><span style="color: #008080;">16</span> <span style="color: #000000;">Status: Downloaded newer image for tomcat:latest
+</span><span style="color: #008080;">17</span> 
+<span style="color: #008080;">18</span> <span style="color: #000000;">#查看镜像
+</span><span style="color: #008080;">19</span> <span style="color: #000000;">[root@localhost home]# docker images
+</span><span style="color: #008080;">20</span> <span style="color: #000000;">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+</span><span style="color: #008080;">21</span> <span style="color: #000000;">tomcat              latest              365b0a528e2e        4 days ago          506MB
+</span><span style="color: #008080;">22</span> <span style="color: #000000;">registry            latest              f32a97de94e1        6 months ago        25.8MB
+</span><span style="color: #008080;">23</span> 
+<span style="color: #008080;">24</span> <span style="color: #000000;">#给镜像重命名，ip:端口/镜像名称
+</span><span style="color: #008080;">25</span> <span style="color: #000000;">[root@localhost home]# docker tag tomcat:latest 127.0.0.1:5000/testtomcat
+</span><span style="color: #008080;">26</span> 
+<span style="color: #008080;">27</span> <span style="color: #000000;">#再次查看镜像
+</span><span style="color: #008080;">28</span> <span style="color: #000000;">[root@localhost home]# docker images
+</span><span style="color: #008080;">29</span> <span style="color: #000000;">REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
+</span><span style="color: #008080;">30</span> <span style="color: #000000;">127.0.0.1:5000/testtomcat   latest              365b0a528e2e        4 days ago          506MB
+</span><span style="color: #008080;">31</span> <span style="color: #000000;">tomcat                      latest              365b0a528e2e        4 days ago          506MB
+</span><span style="color: #008080;">32</span> <span style="color: #000000;">registry                    latest              f32a97de94e1        6 months ago        25.8MB
+</span><span style="color: #008080;">33</span> 
+<span style="color: #008080;">34</span> <span style="color: #000000;">#提交镜像到到docker私服
+</span><span style="color: #008080;">35</span> <span style="color: #000000;">[root@localhost home]# docker push 127.0.0.1:5000/testtomcat
+</span><span style="color: #008080;">36</span> <span style="color: #000000;">The push refers to repository [127.0.0.1:5000/testtomcat]
+</span><span style="color: #008080;">37</span> <span style="color: #000000;">4a3ccf95eef9: Pushed 
+</span><span style="color: #008080;">38</span> <span style="color: #000000;">4437177a7bda: Pushed 
+</span><span style="color: #008080;">39</span> <span style="color: #000000;">5161954b2663: Pushed 
+</span><span style="color: #008080;">40</span> <span style="color: #000000;">57e6a3d20ce9: Pushed 
+</span><span style="color: #008080;">41</span> <span style="color: #000000;">1690af51cb08: Pushed 
+</span><span style="color: #008080;">42</span> <span style="color: #000000;">5a30999619d7: Pushed 
+</span><span style="color: #008080;">43</span> <span style="color: #000000;">2e669e0134f5: Pushed 
+</span><span style="color: #008080;">44</span> <span style="color: #000000;">8bacec4e3446: Pushed 
+</span><span style="color: #008080;">45</span> <span style="color: #000000;">26b1991f37bd: Pushed 
+</span><span style="color: #008080;">46</span> <span style="color: #000000;">55e6b89812f3: Pushed 
+</span><span style="color: #008080;">47</span> <span style="color: #000000;">latest: digest: sha256:416e93b104aa4bceff6005ec6cc4e073196f98d8e3aa4564c3f7d6ad3591d767 size: 2422
+</span><span style="color: #008080;">48</span> 
+<span style="color: #008080;">49</span> <span style="color: #000000;">#curl验证
+</span><span style="color: #008080;">50</span> <span style="color: #000000;">[root@localhost home]# curl http://127.0.0.1:5000/v2/_catalog
+</span><span style="color: #008080;">51</span> {"repositories":["testtomcat"]}</pre>
+</div>
+<h3>3. 拉取镜像</h3>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #000000;">#查看镜像
+</span><span style="color: #008080;"> 2</span> <span style="color: #000000;">[root@localhost home]# docker images
+</span><span style="color: #008080;"> 3</span> <span style="color: #000000;">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+</span><span style="color: #008080;"> 4</span> <span style="color: #000000;">registry            latest              f32a97de94e1        6 months ago        25.8MB
+</span><span style="color: #008080;"> 5</span> 
+<span style="color: #008080;"> 6</span> <span style="color: #000000;">#拉取docker私服镜像
+</span><span style="color: #008080;"> 7</span> <span style="color: #000000;">[root@localhost home]# docker pull 127.0.0.1:5000/testtomcat
+</span><span style="color: #008080;"> 8</span> <span style="color: #000000;">Using default tag: latest
+</span><span style="color: #008080;"> 9</span> <span style="color: #000000;">latest: Pulling from testtomcat
+</span><span style="color: #008080;">10</span> <span style="color: #000000;">092586df9206: Pull complete 
+</span><span style="color: #008080;">11</span> <span style="color: #000000;">ef599477fae0: Pull complete 
+</span><span style="color: #008080;">12</span> <span style="color: #000000;">4530c6472b5d: Pull complete 
+</span><span style="color: #008080;">13</span> <span style="color: #000000;">d34d61487075: Pull complete 
+</span><span style="color: #008080;">14</span> <span style="color: #000000;">272f46008219: Pull complete 
+</span><span style="color: #008080;">15</span> <span style="color: #000000;">12ff6ccfe7a6: Pull complete 
+</span><span style="color: #008080;">16</span> <span style="color: #000000;">f26b99e1adb1: Pull complete 
+</span><span style="color: #008080;">17</span> <span style="color: #000000;">21bec9c8ea28: Pull complete 
+</span><span style="color: #008080;">18</span> <span style="color: #000000;">e2f6023231f2: Pull complete 
+</span><span style="color: #008080;">19</span> <span style="color: #000000;">c47eb491a5e3: Pull complete 
+</span><span style="color: #008080;">20</span> <span style="color: #000000;">Digest: sha256:416e93b104aa4bceff6005ec6cc4e073196f98d8e3aa4564c3f7d6ad3591d767
+</span><span style="color: #008080;">21</span> <span style="color: #000000;">Status: Downloaded newer image for 127.0.0.1:5000/testtomcat:latest
+</span><span style="color: #008080;">22</span> 
+<span style="color: #008080;">23</span> <span style="color: #000000;">#再次查看镜像
+</span><span style="color: #008080;">24</span> <span style="color: #000000;">[root@localhost home]# docker images
+</span><span style="color: #008080;">25</span> <span style="color: #000000;">REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
+</span><span style="color: #008080;">26</span> <span style="color: #000000;">127.0.0.1:5000/testtomcat   latest              365b0a528e2e        4 days ago          506MB
+</span><span style="color: #008080;">27</span> registry                    latest              f32a97de94e1        6 months ago        25.8MB</pre>
+</div>
+<h3>4.删除私服镜像</h3>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #000000;"># 查看当前docker私服中的镜像
+</span><span style="color: #008080;"> 2</span> <span style="color: #000000;">[root@localhost ~]# curl http://127.0.0.1:5000/v2/_catalog
+</span><span style="color: #008080;"> 3</span> <span style="color: #000000;">{"repositories":["mingbytesiteweb"]}
+</span><span style="color: #008080;"> 4</span> 
+<span style="color: #008080;"> 5</span> <span style="color: #000000;"># 查看docker私服容器，重点是 CONTAINER ID
+</span><span style="color: #008080;"> 6</span> <span style="color: #000000;">[root@localhost ~]# docker ps
+</span><span style="color: #008080;"> 7</span> <span style="color: #000000;">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+</span><span style="color: #008080;"> 8</span> <span style="color: #000000;">67b0ac405616        registry:latest     "/entrypoint.sh /etc&hellip;"   44 hours ago        Up 44 hours         0.0.0.0:5000-&gt;5000/tcp   qdockerhub
+</span><span style="color: #008080;"> 9</span> 
+<span style="color: #008080;">10</span> <span style="color: #000000;"># 删除docker私服中的&ldquo;mingbytesiteweb&rdquo;镜像
+</span><span style="color: #008080;">11</span> <span style="color: #000000;"># 其中67b0ac405616 为docker私服容器id
+</span><span style="color: #008080;">12</span> <span style="color: #000000;">[root@localhost ~]# docker exec 67b0ac405616 rm -rf /var/lib/registry/docker/registry/v2/repositories/mingbytesiteweb
+</span><span style="color: #008080;">13</span> 
+<span style="color: #008080;">14</span> <span style="color: #000000;"># 清除掉blob 
+</span><span style="color: #008080;">15</span> <span style="color: #000000;"># 67b0为docker私服容器id
+</span><span style="color: #008080;">16</span> <span style="color: #000000;">[root@localhost ~]# docker exec 67b0 bin/registry garbage-collect /etc/docker/registry/config.yml
+</span><span style="color: #008080;">17</span> 
+<span style="color: #008080;">18</span> <span style="color: #000000;">0 blobs marked, 9 blobs and 0 manifests eligible for deletion
+</span><span style="color: #008080;">19</span> <span style="color: #000000;">blob eligible for deletion: sha256:a381f92f36de52ade5b5610ef1b354713f21902b2ef32abf8f5101daf686e6b4
+</span><span style="color: #008080;">20</span> <span style="color: #000000;">blob eligible for deletion: sha256:cce6b5d4a535e729c30f1f9140a61e5fe408250c442ad69569612094970f8035
+</span><span style="color: #008080;">21</span> <span style="color: #000000;">blob eligible for deletion: sha256:d5c237920c394bda8bf1ef31b00bbde458f6978c159303e00d712a95c3f32a40
+</span><span style="color: #008080;">22</span> <span style="color: #000000;">time="2019-09-20T02:53:41.576433178Z" level=info msg="Deleting blob: /docker/registry/v2/blobs/sha256/a3/a381f92f36de52ade5b5610ef1b354713f21902b2ef32abf8f5101daf686e6b4" go.version=go1.11.2 instance.id=ded69299-53f9-4ffe-9309-a707264a7549 service=registry 
+</span><span style="color: #008080;">23</span> <span style="color: #000000;">time="2019-09-20T02:53:41.576740825Z" level=info msg="Deleting blob: /docker/registry/v2/blobs/sha256/cc/cce6b5d4a535e729c30f1f9140a61e5fe408250c442ad69569612094970f8035" go.version=go1.11.2 instance.id=ded69299-53f9-4ffe-9309-a707264a7549 service=registry 
+</span><span style="color: #008080;">24</span> <span style="color: #000000;">time="2019-09-20T02:53:41.577819834Z" level=info msg="Deleting blob: /docker/registry/v2/blobs/sha256/d5/d5c237920c394bda8bf1ef31b00bbde458f6978c159303e00d712a95c3f32a40" go.version=go1.11.2 instance.id=ded69299-53f9-4ffe-9309-a707264a7549 service=registry 
+</span><span style="color: #008080;">25</span> <span style="color: #000000;">blob eligible for deletion: sha256:f17d81b4b692f7e0d6c1176c86b81d9f2cb5ac5349703adca51c61debcfe413c
+</span><span style="color: #008080;">26</span> <span style="color: #000000;">blob eligible for deletion: sha256:01fe0503c7f786c0613596ab151412f7fd68874d80c43289e5c32725ef1c52ff
+</span><span style="color: #008080;">27</span> <span style="color: #000000;">blob eligible for deletion: sha256:082bd21a11cbf8765d11f10147dc59639118b0700c43a6eef427059faa99e939
+</span><span style="color: #008080;">28</span> <span style="color: #000000;">blob eligible for deletion: sha256:396a68a9a5c5ed3ab7b570199a9daee6b468b5cacd4e2a6d0040e3ea7c9bb891
+</span><span style="color: #008080;">29</span> <span style="color: #000000;">blob eligible for deletion: sha256:3ba74338e49429d19a7e6609eee9f16faa369aa30cdcc295b5382999afa3143a
+</span><span style="color: #008080;">30</span> <span style="color: #000000;">blob eligible for deletion: sha256:5ed7726b81ebb228b250e4ef703ec976b56f8db47d5d9f82ce93ebb026fc6e5f
+</span><span style="color: #008080;">31</span> <span style="color: #000000;">time="2019-09-20T02:53:41.58367518Z" level=info msg="Deleting blob: /docker/registry/v2/blobs/sha256/f1/f17d81b4b692f7e0d6c1176c86b81d9f2cb5ac5349703adca51c61debcfe413c" go.version=go1.11.2 instance.id=ded69299-53f9-4ffe-9309-a707264a7549 service=registry 
+</span><span style="color: #008080;">32</span> <span style="color: #000000;">time="2019-09-20T02:53:41.58874132Z" level=info msg="Deleting blob: /docker/registry/v2/blobs/sha256/01/01fe0503c7f786c0613596ab151412f7fd68874d80c43289e5c32725ef1c52ff" go.version=go1.11.2 instance.id=ded69299-53f9-4ffe-9309-a707264a7549 service=registry 
+</span><span style="color: #008080;">33</span> <span style="color: #000000;">time="2019-09-20T02:53:41.589391384Z" level=info msg="Deleting blob: /docker/registry/v2/blobs/sha256/08/082bd21a11cbf8765d11f10147dc59639118b0700c43a6eef427059faa99e939" go.version=go1.11.2 instance.id=ded69299-53f9-4ffe-9309-a707264a7549 service=registry 
+</span><span style="color: #008080;">34</span> <span style="color: #000000;">time="2019-09-20T02:53:41.589628015Z" level=info msg="Deleting blob: /docker/registry/v2/blobs/sha256/39/396a68a9a5c5ed3ab7b570199a9daee6b468b5cacd4e2a6d0040e3ea7c9bb891" go.version=go1.11.2 instance.id=ded69299-53f9-4ffe-9309-a707264a7549 service=registry 
+</span><span style="color: #008080;">35</span> <span style="color: #000000;">time="2019-09-20T02:53:41.589939086Z" level=info msg="Deleting blob: /docker/registry/v2/blobs/sha256/3b/3ba74338e49429d19a7e6609eee9f16faa369aa30cdcc295b5382999afa3143a" go.version=go1.11.2 instance.id=ded69299-53f9-4ffe-9309-a707264a7549 service=registry 
+</span><span style="color: #008080;">36</span> <span style="color: #000000;">time="2019-09-20T02:53:41.590973494Z" level=info msg="Deleting blob: /docker/registry/v2/blobs/sha256/5e/5ed7726b81ebb228b250e4ef703ec976b56f8db47d5d9f82ce93ebb026fc6e5f" go.version=go1.11.2 instance.id=ded69299-53f9-4ffe-9309-a707264a7549 service=registry 
+　　# 删除完成<br /></span><span style="color: #008080;">37</span> <span style="color: #000000;">[root@localhost ~]# curl http://127.0.0.1:5000/v2/_catalog
+</span><span style="color: #008080;">38</span> {"repositories":[]}</pre>
+</div>
+<h2>错误集合</h2>
+<h3>a. 运行错误1</h3>
+<pre class="line-numbers  language-tsx"><code class="  language-tsx">错误提示<span class="token punctuation">: <span class="token punctuation">[root@izj6c0zsm04q86s2tu4e12z <span class="token operator">/<span class="token punctuation">]# docker run <span class="token operator">-it docker<span class="token punctuation">.io<span class="token operator">/ubuntu<span class="token punctuation">:latest <span class="token operator">/bin<span class="token operator">/bash
+<span class="token operator">/usr<span class="token operator">/bin<span class="token operator">/docker<span class="token operator">-current<span class="token punctuation">: Error response <span class="token keyword">from daemon<span class="token punctuation">: oci runtime error<span class="token punctuation">: container_linux<span class="token punctuation">.go<span class="token punctuation">:<span class="token number">235<span class="token punctuation">: starting container process caused <span class="token string">"process_linux.go:258: applying cgroup configuration for process caused \"Cannot set property TasksAccounting, or unknown property.\""<span class="token punctuation">.
+</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></code></pre>
+<p>解决办法: yum update</p>
+<h3>b. 私有仓库push错误(改配置后一定要重启docker)</h3>
+<ul>
+<li>
+<p>docker私有仓库的5000端口是否在防火墙中打开</p>
+</li>
+<li>
+<p>daemon.json文件中提交镜像的地址是否修改为私有docker仓库的地址</p>
+</li>
+<li>
+<p>添加镜像仓库地址insecure-registries参数，内容修改如下：</p>
+</li>
+</ul>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">vim /etc/docker/daemon.json
+{
+    "registry-mirrors":["https://registry.docker-cn.com"],
+     "insecure-registries":["47.240.32.247:5000"]
+}       <br /></span></pre>
+<p>[root@localhost bin]# systemctl daemon-reload<br />[root@localhost bin]# systemctl restart docker</p>
+<pre><span style="color: #000000;">&nbsp;</span></pre>
+</div>

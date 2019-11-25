@@ -1,0 +1,124 @@
+﻿<h1><strong>系统环境：Centos7</strong></h1>
+<h3><a href="https://jenkins.io/zh/download/">https://jenkins.io/zh/download/</a>&nbsp;下载对应系统的jenkins</h3>
+<h3>一、安装jdk8.0</h3>
+<p>jenkins安装需要jdk8or11，根据jenkins版本而定</p>
+<ul>
+<li>2.164 (2019-02) and newer: Java 8 or Java 11</li>
+<li>2.54 (2017-04) and newer: Java 8</li>
+<li>1.612 (2015-05) and newer: Java 7</li>
+</ul>
+<p>&nbsp;jdk8.0安装教程参考：<a href="https://www.cnblogs.com/jxd283465/p/11541506.html">https://www.cnblogs.com/jxd283465/p/11541506.html</a></p>
+<h3>二、jenkins安装的三种方式</h3>
+<p>1.下载jenkins的war包，用tomcat运行</p>
+<p>war包下载地址：http://mirrors.jenkins.io/war-stable/latest/jenkins.war</p>
+<p>tomcat安装教程参考：<a href="https://www.cnblogs.com/jxd283465/p/11541515.html">https://www.cnblogs.com/jxd283465/p/11541515.html</a></p>
+<p>将jenkins.war放于tomcat的webapps路径下，启动bin路径下的startup.sh即可。</p>
+<p>2.安装jenkins的rpm源，yum安装</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;">sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+</span><span style="color: #008080;">2</span> <span style="color: #000000;">sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+</span><span style="color: #008080;">3</span> yum install jenkins</pre>
+</div>
+<p>3.用docker运行jenkins：前提是安装docker</p>
+<ul>
+<li>docker pull jenkins/jenkins</li>
+</ul>
+<h3>三、jenkins运行</h3>
+<p>&nbsp;本文采用tomcat运行jenkins.war。</p>
+<p>1.下载jenkins.war到tomcat文件下的webapps</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #000000;">[root@localhost webapps]# wget -P /home/tomcat/webapps http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+</span><span style="color: #008080;"> 2</span> <span style="color: #000000;">--2019-09-18 13:52:59--  http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+</span><span style="color: #008080;"> 3</span> <span style="color: #000000;">正在解析主机 mirrors.jenkins.io (mirrors.jenkins.io)... 52.202.51.185
+</span><span style="color: #008080;"> 4</span> <span style="color: #000000;">正在连接 mirrors.jenkins.io (mirrors.jenkins.io)|52.202.51.185|:80... 已连接。
+</span><span style="color: #008080;"> 5</span> <span style="color: #000000;">已发出 HTTP 请求，正在等待回应... 302 Found
+</span><span style="color: #008080;"> 6</span> <span style="color: #000000;">位置：http://ftp-chi.osuosl.org/pub/jenkins/war-stable/2.176.3/jenkins.war [跟随至新的 URL]
+</span><span style="color: #008080;"> 7</span> <span style="color: #000000;">--2019-09-18 13:53:00--  http://ftp-chi.osuosl.org/pub/jenkins/war-stable/2.176.3/jenkins.war
+</span><span style="color: #008080;"> 8</span> <span style="color: #000000;">正在解析主机 ftp-chi.osuosl.org (ftp-chi.osuosl.org)... 64.50.236.52, 2600:3402:200:227::2
+</span><span style="color: #008080;"> 9</span> <span style="color: #000000;">正在连接 ftp-chi.osuosl.org (ftp-chi.osuosl.org)|64.50.236.52|:80... 已连接。
+</span><span style="color: #008080;">10</span> <span style="color: #000000;">已发出 HTTP 请求，正在等待回应... 200 OK
+</span><span style="color: #008080;">11</span> <span style="color: #000000;">长度：77364728 (74M) [application/x-java-archive]
+</span><span style="color: #008080;">12</span> <span style="color: #000000;">正在保存至: &ldquo;jenkins.war&rdquo;
+</span><span style="color: #008080;">13</span> 
+<span style="color: #008080;">14</span> <span style="color: #000000;">100%[=======================================================================================================================================================================================================&gt;] 77,364,728   132KB/s 用时 23m 37s
+</span><span style="color: #008080;">15</span> 
+<span style="color: #008080;">16</span> 2019-09-18 14:16:38 (53.3 KB/s) - 已保存 &ldquo;jenkins.war&rdquo; [77364728/77364728])</pre>
+</div>
+<p>2.运行tomcat，启动jenkins</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;">[root@localhost bin]# pwd
+</span><span style="color: #008080;">2</span> <span style="color: #000000;">/home/tomcat/bin
+</span><span style="color: #008080;">3</span> <span style="color: #000000;">[root@localhost bin]# ./startup.sh 
+</span><span style="color: #008080;">4</span> <span style="color: #000000;">Using CATALINA_BASE:   /home/tomcat
+</span><span style="color: #008080;">5</span> <span style="color: #000000;">Using CATALINA_HOME:   /home/tomcat
+</span><span style="color: #008080;">6</span> <span style="color: #000000;">Using CATALINA_TMPDIR: /home/tomcat/temp
+</span><span style="color: #008080;">7</span> <span style="color: #000000;">Using JRE_HOME:        /home/jdk/jre
+</span><span style="color: #008080;">8</span> <span style="color: #000000;">Using CLASSPATH:       /home/tomcat/bin/bootstrap.jar:/home/tomcat/bin/tomcat-juli.jar
+</span><span style="color: #008080;">9</span> Tomcat started.</pre>
+</div>
+<p>3.浏览器访问<a href="http://192.168.8.30/jenkins">http://192.168.8.30/jenkins</a></p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190918141941032-1985035697.png" alt="" width="765" height="683" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;管理员密码在linux：/root/.jenkins/secrets/initialAdminPassword</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;">[root@localhost bin]# cat /root/.jenkins/secrets/initialAdminPassword
+</span><span style="color: #008080;">2</span> d0a87f7d73c54bdc8212888708b541aa</pre>
+</div>
+<p>输入密码&nbsp;d0a87f7d73c54bdc8212888708b541aa&nbsp; 点击&ldquo;继续&rdquo;。</p>
+<p>4.安装jenkins插件，这里暂时选择推荐方式安装。后续插件按需安装。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190918142201520-191996661.png" alt="" width="770" height="638" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;推荐插件正在安装，稍等片刻，耐心等待。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190918142700652-1326761619.png" alt="" width="768" height="698" /></p>
+<p>&nbsp;5.创建管理员用户。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190918152203977-848775291.png" alt="" width="766" height="704" /></p>
+<p>&nbsp;</p>
+<p>配置访问url</p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190918152233563-1527152010.png" alt="" width="771" height="705" /></p>
+<p>安装完成！ 开始使用！</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190918152310420-1971385869.png" alt="" width="778" height="712" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>访问成功图。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190918152353896-1477380081.png" alt="" width="874" height="382" /></p>
+<h3>四、jenkins目录迁移</h3>
+<p>1.停止jenkins，由于是用tomcat运行的jenkins，所以结束tomcat。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;">[root@localhost bin]# pwd
+</span><span style="color: #008080;">2</span> <span style="color: #000000;">/home/tomcat/bin
+</span><span style="color: #008080;">3</span> <span style="color: #000000;">[root@localhost bin]# ./shutdown.sh 
+</span><span style="color: #008080;">4</span> <span style="color: #000000;">Using CATALINA_BASE:   /home/tomcat
+</span><span style="color: #008080;">5</span> <span style="color: #000000;">Using CATALINA_HOME:   /home/tomcat
+</span><span style="color: #008080;">6</span> <span style="color: #000000;">Using CATALINA_TMPDIR: /home/tomcat/temp
+</span><span style="color: #008080;">7</span> <span style="color: #000000;">Using JRE_HOME:        /home/jdk/jre
+</span><span style="color: #008080;">8</span> Using CLASSPATH:       /home/tomcat/bin/bootstrap.jar:/home/tomcat/bin/tomcat-juli.jar</pre>
+</div>
+<p>2.迁移目标文件为/home/jenkins/.jenkins</p>
+<ul>
+<li>cp -r /root/.jenkins/ /home/jenkins/.jenkins</li>
+</ul>
+<p>3.修改tomcat的catalina.sh文件，加入JENKINS_HOME环境变量参数，第一行下加入：</p>
+<ul>
+<li>export JENKINS_HOME=/home/jenkins/.jenkins</li>
+</ul>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;">[root@localhost bin]# pwd
+</span><span style="color: #008080;">2</span> <span style="color: #000000;">/home/tomcat/bin
+</span><span style="color: #008080;">3</span> [root@localhost bin]# vi catalina.sh </pre>
+</div>
+<p>4.在/etc/profile加入JENKINS_HOME环境变量参数</p>
+<p>vi&nbsp;/etc/profile</p>
+<p>在最后加入</p>
+<ul>
+<li>export JENKINS_HOME=/home/jenkins/.jenkins</li>
+</ul>
+<p>保存退出后执行</p>
+<ul>
+<li>source /etc/profile</li>
+</ul>
+<p>让配置生效。</p>
+<p>重新运行tomcat启动jenkins即可，至此jenkins迁移完成。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919092249198-1764235850.png" alt="" /></p>

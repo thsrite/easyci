@@ -1,0 +1,204 @@
+﻿<h1>前言</h1>
+<p>　　PostgreSQL是一种特性非常齐全的自由软件的对象-关系型数据库管理系统（<a href="https://baike.baidu.com/item/ORDBMS/870762" target="_blank" data-lemmaid="870762">ORDBMS</a>），是以<a href="https://baike.baidu.com/item/%E5%8A%A0%E5%B7%9E%E5%A4%A7%E5%AD%A6/3298010" target="_blank" data-lemmaid="3298010">加州大学</a>计算机系开发的POSTGRES，4.2版本为基础的对象关系型数据库管理系统。POSTGRES的许多领先概念只是在比较迟的时候才出现在商业网站数据库中。PostgreSQL支持大部分的SQL标准并且提供了很多其他现代特性，如复杂查询、外键、触发器、视图、事务完整性、多版本并发控制等。同样，PostgreSQL也可以用许多方法扩展，例如通过增加新的数据类型、函数、操作符、聚集函数、索引方法、过程语言等。另外，因为许可证的灵活，任何人都可以以任何目的免费使用、修改和分发PostgreSQL。</p>
+<h1>安装</h1>
+<p>1.下载PostgreSQL&nbsp; &nbsp;<a href="https://www.enterprisedb.com/download-postgresql-binaries">https://www.enterprisedb.com/download-postgresql-binaries</a></p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919155603154-648140558.png" alt="" width="935" height="626" /></p>
+<p>&nbsp;下载相应版本通过ftp上传到服务器的/home路径下，然后解压，得到pgsql文件夹</p>
+<p>2.创建pgsql用户并创建密码：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;">[root@localhost home]# useradd postgres
+</span><span style="color: #008080;">2</span> <span style="color: #000000;">[root@localhost home]# passwd postgres
+</span><span style="color: #008080;">3</span> <span style="color: #000000;">更改用户 postgres 的密码 。
+</span><span style="color: #008080;">4</span> <span style="color: #000000;">新的 密码：
+</span><span style="color: #008080;">5</span> <span style="color: #000000;">无效的密码： 密码包含用户名在某些地方
+</span><span style="color: #008080;">6</span> <span style="color: #000000;">重新输入新的 密码：
+</span><span style="color: #008080;">7</span> passwd：所有的身份验证令牌已经成功更新。</pre>
+</div>
+<p>注意：这里设置密码是linux用户postgres的登录密码，不是pgsql服务器的密码</p>
+<p>3.创建pgsql的数据目录并赋权限</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;"># 当前目录在/home下
+</span><span style="color: #008080;">2</span> <span style="color: #000000;">[root@localhost home]# pwd
+</span><span style="color: #008080;">3</span> <span style="color: #000000;">/home
+</span><span style="color: #008080;">4</span> 
+<span style="color: #008080;">5</span> <span style="color: #000000;"># 创建/home/pgsql/pgsql_data
+</span><span style="color: #008080;">6</span> <span style="color: #000000;">[root@localhost home]# mkdir pgsql/pgsql_data
+</span><span style="color: #008080;">7</span> 
+<span style="color: #008080;">8</span> <span style="color: #000000;"># 赋予pgsql_data文件夹 postgres用户权限
+</span><span style="color: #008080;">9</span> [root@localhost home]# chown postgres:postgres pgsql/pgsql_data</pre>
+</div>
+<p>4.初始化数据库</p>
+<p>切换到postgres用户来操作数据库，pgsql数据库就以postgres为默认用户，执行： su - postgres 切换</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #000000;"># 切换到postgres用户
+</span><span style="color: #008080;"> 2</span> <span style="color: #000000;">[root@localhost home]#  su  postgres
+</span><span style="color: #008080;"> 3</span> 
+<span style="color: #008080;"> 4</span> <span style="color: #000000;">-bash-4.2$ pwd
+</span><span style="color: #008080;"> 5</span> <span style="color: #000000;">/home
+</span><span style="color: #008080;"> 6</span> 
+<span style="color: #008080;"> 7</span> <span style="color: #000000;"># 初始化数据库
+</span><span style="color: #008080;"> 8</span> <span style="color: #000000;">-bash-4.2$ /home/pgsql/bin/initdb -D /home/pgsql/pgsql_data
+</span><span style="color: #008080;"> 9</span> <span style="color: #000000;">The files belonging to this database system will be owned by user "postgres".
+</span><span style="color: #008080;">10</span> <span style="color: #000000;">This user must also own the server process.
+</span><span style="color: #008080;">11</span> 
+<span style="color: #008080;">12</span> <span style="color: #000000;">The database cluster will be initialized with locale "zh_CN.UTF-8".
+</span><span style="color: #008080;">13</span> <span style="color: #000000;">The default database encoding has accordingly been set to "UTF8".
+</span><span style="color: #008080;">14</span> <span style="color: #000000;">initdb: could not find suitable text search configuration for locale "zh_CN.UTF-8"
+</span><span style="color: #008080;">15</span> <span style="color: #000000;">The default text search configuration will be set to "simple".
+</span><span style="color: #008080;">16</span> 
+<span style="color: #008080;">17</span> <span style="color: #000000;">Data page checksums are disabled.
+</span><span style="color: #008080;">18</span> 
+<span style="color: #008080;">19</span> <span style="color: #000000;">fixing permissions on existing directory /home/pgsql/pgsql_data ... ok
+</span><span style="color: #008080;">20</span> <span style="color: #000000;">creating subdirectories ... ok
+</span><span style="color: #008080;">21</span> <span style="color: #000000;">selecting default max_connections ... 100
+</span><span style="color: #008080;">22</span> <span style="color: #000000;">selecting default shared_buffers ... 128MB
+</span><span style="color: #008080;">23</span> <span style="color: #000000;">selecting default timezone ... Asia/Shanghai
+</span><span style="color: #008080;">24</span> <span style="color: #000000;">selecting dynamic shared memory implementation ... posix
+</span><span style="color: #008080;">25</span> <span style="color: #000000;">creating configuration files ... ok
+</span><span style="color: #008080;">26</span> <span style="color: #000000;">running bootstrap script ... ok
+</span><span style="color: #008080;">27</span> <span style="color: #000000;">performing post-bootstrap initialization ... ok
+</span><span style="color: #008080;">28</span> <span style="color: #000000;">syncing data to disk ... ok
+</span><span style="color: #008080;">29</span> 
+<span style="color: #008080;">30</span> <span style="color: #000000;">WARNING: enabling "trust" authentication for local connections
+</span><span style="color: #008080;">31</span> <span style="color: #000000;">You can change this by editing pg_hba.conf or using the option -A, or
+</span><span style="color: #008080;">32</span> <span style="color: #000000;">--auth-local and --auth-host, the next time you run initdb.
+</span><span style="color: #008080;">33</span> 
+<span style="color: #008080;">34</span> <span style="color: #000000;">Success. You can now start the database server using:
+</span><span style="color: #008080;">35</span> 
+<span style="color: #008080;">36</span>     /home/pgsql/bin/pg_ctl -D /home/pgsql/pgsql_data -l logfile start</pre>
+</div>
+<p>5.启动数据库</p>
+<p>初始化数据库时，最后打印出启动数据库命令：&nbsp; &nbsp;/home/pgsql/bin/pg_ctl -D /home/pgsql/pgsql_data -l logfile start</p>
+<p>这里-l指定日志文件位置，这里直接输出在家目录下的logfile中，这个可以自己指定，这里-D指定数据目录，默认如果不加数据目录直接报错找不到，可以刚才说的环境变量配置文件中~/.bash_profile加入一行：&nbsp;export PGDATA=/home/pgsql/pgsql_data&nbsp;然后source进去即可，这样pgsql会自动去找PGDATA环境变量值，找不到才会报错<br />启动之后此时执行：&nbsp;ps&nbsp;-ef |&nbsp;grep&nbsp;postgres&nbsp;就可以看到相关进程如下：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #000000;">-bash-4.2$  /home/pgsql/bin/pg_ctl -D /home/pgsql/pgsql_data -l /home/pgsql/logfile start
+</span><span style="color: #008080;"> 2</span> <span style="color: #000000;">waiting for server to start.... done
+</span><span style="color: #008080;"> 3</span> <span style="color: #000000;">server started<br /><br />  # 查看postgres进程
+</span><span style="color: #008080;"> 4</span> <span style="color: #000000;">-bash-4.2$ ps -ef | grep postgres
+</span><span style="color: #008080;"> 5</span> <span style="color: #000000;">root     20480  4206  0 16:10 pts/0    00:00:00 su - postgres
+</span><span style="color: #008080;"> 6</span> <span style="color: #000000;">postgres 20481 20480  0 16:10 pts/0    00:00:00 -bash
+</span><span style="color: #008080;"> 7</span> <span style="color: #000000;">postgres 20544     1  0 16:16 pts/0    00:00:00 /home/pgsql/bin/postgres -D /home/pgsql/pgsql_data
+</span><span style="color: #008080;"> 8</span> <span style="color: #000000;">postgres 20546 20544  0 16:16 ?        00:00:00 postgres: checkpointer process   
+</span><span style="color: #008080;"> 9</span> <span style="color: #000000;">postgres 20547 20544  0 16:16 ?        00:00:00 postgres: writer process   
+</span><span style="color: #008080;">10</span> <span style="color: #000000;">postgres 20548 20544  0 16:16 ?        00:00:00 postgres: wal writer process   
+</span><span style="color: #008080;">11</span> <span style="color: #000000;">postgres 20549 20544  0 16:16 ?        00:00:00 postgres: autovacuum launcher process   
+</span><span style="color: #008080;">12</span> <span style="color: #000000;">postgres 20550 20544  0 16:16 ?        00:00:00 postgres: stats collector process   
+</span><span style="color: #008080;">13</span> <span style="color: #000000;">postgres 20551 20544  0 16:16 ?        00:00:00 postgres: bgworker: logical replication launcher  
+</span><span style="color: #008080;">14</span> <span style="color: #000000;">postgres 20552 20481  0 16:16 pts/0    00:00:00 ps -ef
+</span><span style="color: #008080;">15</span> postgres 20553 20481  0 16:16 pts/0    00:00:00 grep --color=auto postgres</pre>
+</div>
+<p>pgsql默认的端口号为5432</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">-bash-4.2$ netstat -tunlp | grep 5432
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN      20544/postgres      
+tcp6       0      0 ::1:5432                :::*                    LISTEN      20544/postgres  </span></pre>
+</div>
+<p>6.开启远程访问</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;"># 找到pgsql_data文件夹
+[root@localhost pgsql_data]# pwd
+/home/pgsql/pgsql_data
+
+
+[root@localhost pgsql_data]# ls
+base    pg_commit_ts  pg_hba.conf    pg_logical    pg_notify    pg_serial     pg_stat      pg_subtrans  pg_twophase  pg_wal   postgresql.auto.conf  postmaster.opts
+global  pg_dynshmem   pg_ident.conf  pg_multixact  pg_replslot  pg_snapshots  pg_stat_tmp  pg_tblspc    PG_VERSION   pg_xact  postgresql.conf       postmaster.pid
+
+# vi修改postgresql.conf
+[root@localhost pgsql_data]# vi postgresql.conf <br /><br />将 listen_addresses 前的#删掉，然后把localhost改成 * <br /></span></pre>
+</div>
+<p>重启即可。</p>
+<pre><span>/home/pgsql/bin/pg_ctl -D /home/pgsql/pgsql_data -l /home/pgsql/logfile restart</span></pre>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;"># 修改重启前 127.0.0.1:5432 
+</span><span style="color: #008080;">2</span> <span style="color: #000000;">[root@localhost pgsql_data]# netstat -tunlp | grep 5432
+</span><span style="color: #008080;">3</span> <span style="color: #000000;">tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN      20544/postgres      
+</span><span style="color: #008080;">4</span> <span style="color: #000000;">tcp6       0      0 ::1:5432                :::*                    LISTEN      20544/postgres      
+</span><span style="color: #008080;">5</span> 
+<span style="color: #008080;">6</span> <span style="color: #000000;"># 修改重启后 0.0.0.0:5432  
+</span><span style="color: #008080;">7</span> <span style="color: #000000;">[root@localhost pgsql_data]# netstat -tunlp | grep 5432
+</span><span style="color: #008080;">8</span> <span style="color: #000000;">tcp        0      0 0.0.0.0:5432            0.0.0.0:*               LISTEN      20595/postgres      
+</span><span style="color: #008080;">9</span> tcp6       0      0 :::5432                 :::*                    LISTEN      20595/postgres  </pre>
+</div>
+<p>7.连接数据库</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;">[root@localhost bin]# /home/pgsql/bin/psql -h 127.0.0.1 -d postgres -U postgres -p 5432
+</span><span style="color: #008080;">2</span> <span style="color: #000000;">psql.bin (10.10)
+</span><span style="color: #008080;">3</span> <span style="color: #000000;">Type "help" for help.
+</span><span style="color: #008080;">4</span> 
+<span style="color: #008080;">5</span> postgres=# </pre>
+</div>
+<p>其中-h参数指定服务器地址，默认为127.0.0.1，默认不指定即可，-d指定连接之后选中的数据库，默认也是postgres，-U指定用户，默认是当前用户，-p 指定端口号，默认是"5432"</p>
+<p>查看当前数据库列表</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">postgres=# &nbsp;\l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | zh_CN.UTF-8 | zh_CN.UTF-8 | 
+ template0 | postgres | UTF8     | zh_CN.UTF-8 | zh_CN.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | zh_CN.UTF-8 | zh_CN.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(3 rows)</span></pre>
+</div>
+<p>默认postgres，template0和1这3个库是不允许操作的，创建新的数据库执行： CREATE DATABASE test WITH OWNER=postgres ENCODING='UTF-8'; 这样就创建好了数据库test，然后可以执行命令 \c test 切换当前数据库为test，然后执行 \d 可以查看当前数据库下的所有表：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;"># 创建test数据库<br />postgres=# CREATE DATABASE test WITH OWNER=postgres ENCODING='UTF-8';
+CREATE DATABASE<br /># 查看所有数据库列表
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | zh_CN.UTF-8 | zh_CN.UTF-8 | 
+ template0 | postgres | UTF8     | zh_CN.UTF-8 | zh_CN.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | zh_CN.UTF-8 | zh_CN.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ test      | postgres | UTF8     | zh_CN.UTF-8 | zh_CN.UTF-8 | 
+(4 rows)
+<br /># 切换到test数据库
+postgres=# \c test
+You are now connected to database "test" as user "postgres".<br /><br /># 查看test数据库的所有表
+test=# \d
+Did not find any relations.</span></pre>
+</div>
+<p>创建一个表</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;"># 创建一个表student
+test=# CREATE TABLE student (
+test(#   id integer NOT NULL,
+test(#   name character(32),
+test(#   number char(5),
+test(#   CONSTRAINT student_pkey PRIMARY KEY (id)
+test(# );
+CREATE TABLE
+
+# 查看student表结构
+test=# &nbsp;\d student
+                 Table "public.student"
+ Column |     Type      | Collation | Nullable | Default 
+--------+---------------+-----------+----------+---------
+ id     | integer       |           | not null | 
+ name   | character(32) |           |          | 
+ number | character(5)  |           |          | 
+Indexes:
+    "student_pkey" PRIMARY KEY, btree (id)
+
+# 插入student表一条数据                                          
+test=# INSERT INTO student (id,name,number) VALUES (1,'张三','1023');
+INSERT 0 1
+
+# 查看插入的数据
+test=# SELECT * FROM student WHERE id=1;
+ id |                name                | number 
+----+------------------------------------+--------
+  1 | 张三                               | 1023 
+(1 row)
+
+# \q退出pgsql
+test=# \q
+[root@localhost bin]# </span></pre>
+</div>

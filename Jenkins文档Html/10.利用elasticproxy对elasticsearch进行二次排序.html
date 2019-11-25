@@ -1,0 +1,28 @@
+﻿<div class="cnblogs_code">
+<pre><span style="color: #000000;"><span style="color: #888888; font-size: 16px;">做过elk的人应该了解kibana排序至支持到秒级别，但同一秒内出现多个日志的时候那么kibana展示的日志就会混轮，加上该代理可以解决该问题</span><br /><br /># 拉取elasticproxy镜像
+[root@localhost ELK-filebeat]#<span style="color: #ff0000;"> docker pull zhangyuming/elasticproxy</span>
+Using default tag: latest
+latest: Pulling from zhangyuming/elasticproxy
+cd784148e348: Pull complete 
+ee296a93e79d: Pull complete 
+Digest: sha256:c0c91a4ee3151f268006de76bc3e9915c2524248cb3049632b96c2e35204f346
+Status: Downloaded newer image for zhangyuming/elasticproxy:latest
+# 运行elasticproxy容器
+[root@localhost ELK-filebeat]# <span style="color: #ff0000;">docker run -d -p 8899:8899 --name elasticproxy zhangyuming/elasticproxy elasticproxy -elastic_host 192.168.8.20:9200</span>
+c01ecc924982df8c8e622fa9588fbf672d2cdac85e14509004ef7bfefdbe9fe5
+
+[root@localhost ELK-filebeat]# docker ps
+CONTAINER ID        IMAGE                      COMMAND                  CREATED             STATUS              PORTS                                                      NAMES
+<span style="color: #ff0000;">c01ecc924982        zhangyuming/elasticproxy   "elasticproxy -elast&hellip;"   4 seconds ago       Up 2 seconds        0.0.0.0:8899-&gt;8899/tcp                                     elasticproxy</span></span></pre>
+</div>
+<p>&nbsp;</p>
+<p>修改&nbsp; &nbsp; <span style="color: #ff0000;">&nbsp;/home/ELK-filebeat/docker-elk/kibana/config/kibana.yml&nbsp;</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;"># 修改 kibana.yml  ，将elasticsearch指向到elasticproxy的地址
+[root@localhost config]# pwd
+/home/ELK-filebeat/docker-elk/kibana/config
+[root@localhost config]# vi kibana.yml 
+
+<span style="color: #ff0000;">    elasticsearch.hosts: [ "http://192.168.8.20:8899" ]</span></span></pre>
+</div>
+<p>&nbsp;</p>

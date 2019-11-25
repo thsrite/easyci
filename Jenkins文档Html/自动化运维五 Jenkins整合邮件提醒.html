@@ -1,0 +1,106 @@
+﻿<p>1.安装插件&nbsp;Email Extension Template Plugin</p>
+<p>安装教程参考：<a href="https://www.cnblogs.com/jxd283465/p/11542680.html">https://www.cnblogs.com/jxd283465/p/11542680.html</a></p>
+<p>2.系统设置管理员邮箱及邮件模板等</p>
+<p>在系统设置中找到&ldquo;Jenkins Location&rdquo;，配置管理员邮箱，即发信邮箱</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919143037631-1834620181.png" alt="" /></p>
+<p>在系统设置中找到&ldquo;Extended E-mail Notification&rdquo;</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919145955215-1432195468.png" alt="" width="1182" height="340" /></p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919150048469-1755412092.png" alt="" width="1191" height="547" /></p>
+<p>&nbsp;标题：</p>
+<div class="cnblogs_code">
+<pre>构建通知：$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!</pre>
+</div>
+<p>邮件模板：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE html</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">html</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">charset</span><span style="color: #0000ff;">="UTF-8"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>${ENV, var="JOB_NAME"}-第${BUILD_NUMBER}次构建日志<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+ 
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">body </span><span style="color: #ff0000;">leftmargin</span><span style="color: #0000ff;">="8"</span><span style="color: #ff0000;"> marginwidth</span><span style="color: #0000ff;">="0"</span><span style="color: #ff0000;"> topmargin</span><span style="color: #0000ff;">="8"</span><span style="color: #ff0000;"> marginheight</span><span style="color: #0000ff;">="4"</span><span style="color: #ff0000;">
+    offset</span><span style="color: #0000ff;">="0"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">table </span><span style="color: #ff0000;">width</span><span style="color: #0000ff;">="95%"</span><span style="color: #ff0000;"> cellpadding</span><span style="color: #0000ff;">="0"</span><span style="color: #ff0000;"> cellspacing</span><span style="color: #0000ff;">="0"</span><span style="color: #ff0000;">
+        style</span><span style="color: #0000ff;">="font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif"</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;</span>(本邮件是程序自动下发的，请勿回复！)<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;&lt;</span><span style="color: #800000;">h2</span><span style="color: #0000ff;">&gt;</span>
+                    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">font </span><span style="color: #ff0000;">color</span><span style="color: #0000ff;">="#0000FF"</span><span style="color: #0000ff;">&gt;</span>构建结果 - ${BUILD_STATUS}<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">font</span><span style="color: #0000ff;">&gt;</span>
+                <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">h2</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;&lt;</span><span style="color: #800000;">br </span><span style="color: #0000ff;">/&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">b</span><span style="color: #0000ff;">&gt;&lt;</span><span style="color: #800000;">font </span><span style="color: #ff0000;">color</span><span style="color: #0000ff;">="#0B610B"</span><span style="color: #0000ff;">&gt;</span>构建信息<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">font</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">b</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">hr </span><span style="color: #ff0000;">size</span><span style="color: #0000ff;">="2"</span><span style="color: #ff0000;"> width</span><span style="color: #0000ff;">="100%"</span><span style="color: #ff0000;"> align</span><span style="color: #0000ff;">="center"</span> <span style="color: #0000ff;">/&gt;&lt;/</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;</span>
+                <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">ul</span><span style="color: #0000ff;">&gt;</span>
+                    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>项目名称&nbsp;：&nbsp;${PROJECT_NAME}<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>
+                    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>构建编号&nbsp;：&nbsp;第${BUILD_NUMBER}次构建<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>
+                    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>构建人：&nbsp;${GIT_BRANCH}<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>
+                    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>触发原因：&nbsp;${CAUSE}<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>
+                    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>构建日志：&nbsp;<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">a </span><span style="color: #ff0000;">href</span><span style="color: #0000ff;">="${BUILD_URL}console"</span><span style="color: #0000ff;">&gt;</span>${BUILD_URL}console<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">a</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>
+                    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>构建&nbsp;&nbsp;Url&nbsp;：&nbsp;<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">a </span><span style="color: #ff0000;">href</span><span style="color: #0000ff;">="${BUILD_URL}"</span><span style="color: #0000ff;">&gt;</span>${BUILD_URL}<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">a</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>
+                    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>工作目录&nbsp;：&nbsp;<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">a </span><span style="color: #ff0000;">href</span><span style="color: #0000ff;">="${PROJECT_URL}ws"</span><span style="color: #0000ff;">&gt;</span>${PROJECT_URL}ws<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">a</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>
+                    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>项目&nbsp;&nbsp;Url&nbsp;：&nbsp;<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">a </span><span style="color: #ff0000;">href</span><span style="color: #0000ff;">="${PROJECT_URL}"</span><span style="color: #0000ff;">&gt;</span>${PROJECT_URL}<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">a</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>
+                    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>代码审查：&nbsp;<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">a </span><span style="color: #ff0000;">href</span><span style="color: #0000ff;">="http://192.168.8.100:9002/dashboard?id=${PROJECT_NAME}"</span><span style="color: #0000ff;">&gt;</span>http://192.168.8.100:9002/dashboard?id=${PROJECT_NAME}<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">a</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>
+                <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">ul</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;&lt;</span><span style="color: #800000;">b</span><span style="color: #0000ff;">&gt;&lt;</span><span style="color: #800000;">font </span><span style="color: #ff0000;">color</span><span style="color: #0000ff;">="#0B610B"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">Changes Since Last
+                        Successful Build:</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">font</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">b</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">hr </span><span style="color: #ff0000;">size</span><span style="color: #0000ff;">="2"</span><span style="color: #ff0000;"> width</span><span style="color: #0000ff;">="100%"</span><span style="color: #ff0000;"> align</span><span style="color: #0000ff;">="center"</span> <span style="color: #0000ff;">/&gt;&lt;/</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;</span>
+                <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">ul</span><span style="color: #0000ff;">&gt;</span>
+                    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>历史变更记录 : <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">a </span><span style="color: #ff0000;">href</span><span style="color: #0000ff;">="${PROJECT_URL}changes"</span><span style="color: #0000ff;">&gt;</span>${PROJECT_URL}changes<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">a</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>
+                <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">ul</span><span style="color: #0000ff;">&gt;</span> ${CHANGES_SINCE_LAST_SUCCESS,reverse=true, format="Changes for Build #%n:<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">br </span><span style="color: #0000ff;">/&gt;</span>%c<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">br </span><span style="color: #0000ff;">/&gt;</span>",showPaths=true,changesFormat="<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">pre</span><span style="color: #0000ff;">&gt;</span>[%a]<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">br </span><span style="color: #0000ff;">/&gt;</span>%m<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">pre</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">",pathFormat="&nbsp;&nbsp;&nbsp;&nbsp;%p"}
+            </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;&lt;</span><span style="color: #800000;">b</span><span style="color: #0000ff;">&gt;</span>Failed Test Results<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">b</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">hr </span><span style="color: #ff0000;">size</span><span style="color: #0000ff;">="2"</span><span style="color: #ff0000;"> width</span><span style="color: #0000ff;">="100%"</span><span style="color: #ff0000;"> align</span><span style="color: #0000ff;">="center"</span> <span style="color: #0000ff;">/&gt;&lt;/</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;&lt;</span><span style="color: #800000;">pre
+                    </span><span style="color: #ff0000;">style</span><span style="color: #0000ff;">="font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif"</span><span style="color: #0000ff;">&gt;</span>$FAILED_TESTS<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">pre</span><span style="color: #0000ff;">&gt;</span>
+                <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">br </span><span style="color: #0000ff;">/&gt;&lt;/</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;&lt;</span><span style="color: #800000;">b</span><span style="color: #0000ff;">&gt;&lt;</span><span style="color: #800000;">font </span><span style="color: #ff0000;">color</span><span style="color: #0000ff;">="#0B610B"</span><span style="color: #0000ff;">&gt;</span>构建日志 (最后 100行):<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">font</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">b</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">hr </span><span style="color: #ff0000;">size</span><span style="color: #0000ff;">="2"</span><span style="color: #ff0000;"> width</span><span style="color: #0000ff;">="100%"</span><span style="color: #ff0000;"> align</span><span style="color: #0000ff;">="center"</span> <span style="color: #0000ff;">/&gt;&lt;/</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> &lt;tr&gt;
+            &lt;td&gt;Test Logs (if test has ran): &lt;a
+                href="${PROJECT_URL}ws/TestResult/archive_logs/Log-Build-${BUILD_NUMBER}.zip"&gt;${PROJECT_URL}/ws/TestResult/archive_logs/Log-Build-${BUILD_NUMBER}.zip&lt;/a&gt;
+                &lt;br /&gt;
+            &lt;br /&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt; </span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;&lt;</span><span style="color: #800000;">textarea </span><span style="color: #ff0000;">cols</span><span style="color: #0000ff;">="80"</span><span style="color: #ff0000;"> rows</span><span style="color: #0000ff;">="30"</span><span style="color: #ff0000;"> readonly</span><span style="color: #0000ff;">="readonly"</span><span style="color: #ff0000;">
+                    style</span><span style="color: #0000ff;">="font-family: Courier New"</span><span style="color: #0000ff;">&gt;</span>${BUILD_LOG, maxLines=100}<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">textarea</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">td</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">tr</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">table</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">html</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>Jenkins项目配置：</p>
+<p>构建后操作选择--Editable Email Notification</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919150304530-368390329.png" alt="" /></p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919150437017-2064075324.png" alt="" /></p>
+<p>点击&ldquo; Advanced Settings &rdquo;设置邮件发送tigger</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919152344057-654499583.png" alt="" width="1261" height="193" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919152433651-1537467408.png" alt="" width="1277" height="605" /></p>
+<p>&nbsp;发送成功！</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919153215487-1989550340.png" alt="" /></p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190919153310560-113335874.png" alt="" /></p>
+<p>&nbsp;</p>

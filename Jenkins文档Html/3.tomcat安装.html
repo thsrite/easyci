@@ -1,0 +1,70 @@
+﻿<h1>系统环境：Centos7</h1>
+<h3>1.下载tomcat8.5</h3>
+<ul>
+<li><span>wget http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-8/v8.5.45/bin/apache-tomcat-8.5.45.tar.gz</span></li>
+</ul>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #000000;">[root@localhost home]# wget http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-8/v8.5.45/bin/apache-tomcat-8.5.45.tar.gz
+</span><span style="color: #008080;"> 2</span> <span style="color: #000000;">--2019-09-18 13:25:16--  http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-8/v8.5.45/bin/apache-tomcat-8.5.45.tar.gz
+</span><span style="color: #008080;"> 3</span> <span style="color: #000000;">正在解析主机 mirrors.tuna.tsinghua.edu.cn (mirrors.tuna.tsinghua.edu.cn)... 101.6.8.193, 2402:f000:1:408:8100::1
+</span><span style="color: #008080;"> 4</span> <span style="color: #000000;">正在连接 mirrors.tuna.tsinghua.edu.cn (mirrors.tuna.tsinghua.edu.cn)|101.6.8.193|:80... 已连接。
+</span><span style="color: #008080;"> 5</span> <span style="color: #000000;">已发出 HTTP 请求，正在等待回应... 200 OK
+</span><span style="color: #008080;"> 6</span> <span style="color: #000000;">长度：9722154 (9.3M) [application/x-gzip]
+</span><span style="color: #008080;"> 7</span> <span style="color: #000000;">正在保存至: &ldquo;apache-tomcat-8.5.45.tar.gz&rdquo;
+</span><span style="color: #008080;"> 8</span> 
+<span style="color: #008080;"> 9</span> <span style="color: #000000;">100%[=======================================================================================================================================================================================================&gt;] 9,722,154   14.9MB/s 用时 0.6s   
+</span><span style="color: #008080;">10</span> 
+<span style="color: #008080;">11</span> 2019-09-18 13:25:27 (14.9 MB/s) - 已保存 &ldquo;apache-tomcat-8.5.45.tar.gz&rdquo; [9722154/9722154])</pre>
+</div>
+<h3>2.解压</h3>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;">[root@localhost home]# tar -zxvf apache-tomcat-8.5.45.tar.gz 
+</span><span style="color: #008080;">2</span> <span style="color: #000000;">apache-tomcat-8.5.45/conf/
+</span><span style="color: #008080;">3</span> <span style="color: #000000;">&hellip;&hellip;
+</span><span style="color: #008080;">4</span> <span style="color: #000000;">[root@localhost home]# ls -l
+</span><span style="color: #008080;">5</span> <span style="color: #000000;">总用量 9496
+</span><span style="color: #008080;">6</span> <span style="color: #000000;">drwxr-xr-x 9 root root     220 9月  18 13:26 apache-tomcat-8.5.45
+</span><span style="color: #008080;">7</span> -rw-r--r-- 1 root root 9722154 8月  15 06:46 apache-tomcat-8.5.45.tar.gz</pre>
+</div>
+<h3>3.运行</h3>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;">[root@localhost home]# cd apache-tomcat-8.5.45/bin
+</span><span style="color: #008080;">2</span> <span style="color: #000000;">[root@localhost bin]# ./startup.sh 
+</span><span style="color: #008080;">3</span> <span style="color: #000000;">Using CATALINA_BASE:   /home/apache-tomcat-8.5.45
+</span><span style="color: #008080;">4</span> <span style="color: #000000;">Using CATALINA_HOME:   /home/apache-tomcat-8.5.45
+</span><span style="color: #008080;">5</span> <span style="color: #000000;">Using CATALINA_TMPDIR: /home/apache-tomcat-8.5.45/temp
+</span><span style="color: #008080;">6</span> <span style="color: #000000;">Using JRE_HOME:        /home/jdk/jre
+</span><span style="color: #008080;">7</span> <span style="color: #000000;">Using CLASSPATH:       /home/apache-tomcat-8.5.45/bin/bootstrap.jar:/home/apache-tomcat-8.5.45/bin/tomcat-juli.jar
+</span><span style="color: #008080;">8</span> Tomcat started.</pre>
+</div>
+<p>浏览器访问：<a href="http://192.168.8.162:8080/">http://192.168.8.162:8080</a>，tomcat安装成功</p>
+<p><img src="https://img2018.cnblogs.com/blog/1335688/201909/1335688-20190918133502334-1831520531.png" alt="" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3>&nbsp;4.关闭tomcat</h3>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;">[root@localhost bin]# pwd
+</span><span style="color: #008080;">2</span> <span style="color: #000000;">/home/apache-tomcat-8.5.45/bin
+</span><span style="color: #008080;">3</span> <span style="color: #000000;">[root@localhost bin]# ./shutdown.sh 
+</span><span style="color: #008080;">4</span> <span style="color: #000000;">Using CATALINA_BASE:   /home/apache-tomcat-8.5.45
+</span><span style="color: #008080;">5</span> <span style="color: #000000;">Using CATALINA_HOME:   /home/apache-tomcat-8.5.45
+</span><span style="color: #008080;">6</span> <span style="color: #000000;">Using CATALINA_TMPDIR: /home/apache-tomcat-8.5.45/temp
+</span><span style="color: #008080;">7</span> <span style="color: #000000;">Using JRE_HOME:        /home/jdk/jre
+</span><span style="color: #008080;">8</span> Using CLASSPATH:       /home/apache-tomcat-8.5.45/bin/bootstrap.jar:/home/apache-tomcat-8.5.45/bin/tomcat-juli.jar</pre>
+</div>
+<h3>5.修改tomcat端口号</h3>
+<p>修改conf文件下的server.xml，将port端口改成其他端口即可。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;">[root@localhost conf]# pwd
+</span><span style="color: #008080;">2</span> <span style="color: #000000;">/home/apache-tomcat-8.5.45/conf
+</span><span style="color: #008080;">3</span> [root@localhost conf]# vi server.xml </pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">Connector </span><span style="color: #ff0000;">port</span><span style="color: #0000ff;">="8080"</span><span style="color: #ff0000;"> protocol</span><span style="color: #0000ff;">="HTTP/1.1"</span><span style="color: #ff0000;">
+           connectionTimeout</span><span style="color: #0000ff;">="20000"</span><span style="color: #ff0000;">
+           redirectPort</span><span style="color: #0000ff;">="8443"</span> <span style="color: #0000ff;">/&gt;</span></pre>
+</div>
+<h3>6.tomcat发布服务</h3>
+<p>将需要发布的静态文件或者war包放在tomcat的webapps路径下，启动tomcat服务即可。</p>
+<p>发布多个服务</p>
+<p>server.xml配置文件&lt;Host&gt;中添加&nbsp;&nbsp;&lt;Context path="" docBase="/opt/tomcat/webapps/****"/&gt;&nbsp;</p>
