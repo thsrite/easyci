@@ -7,6 +7,19 @@ easyci-ui：前端
 
 shell：shell脚本
 
+
+easyci是傻瓜式一键部署本系统
+
+sh：shell脚本
+
+work：vue的dist文件及jar包、nginx配置文件、mysql数据库sql
+
+install.sh：一键安装系统环境脚本
+
+startEasyCi：启动服务脚本
+
+stopEasyCi：停止服务脚本
+
   EasyCi系统开发的目的是免去远程发布的免密登陆、拉取gitlab代码的认证、手动添加gitlab hook、查看gitlab中该项目的git地址等等多余的操作。
 	
   这些操作均有后台自动完成，系统提供运行环境一键安装脚本、自动化安装部署本系统、开箱即用，只需要几个参数即可实现项目的远程构建，暂时只支持vue和java项目的构建。
