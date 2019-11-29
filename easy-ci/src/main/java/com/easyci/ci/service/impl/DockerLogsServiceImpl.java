@@ -85,7 +85,7 @@ public class DockerLogsServiceImpl implements DockerLogsService {
                 sb.append(line);
                 sb.append("\n");
                 /* 将读取的长度追加到变量中 */
-                realSkip +=sb.length();
+                realSkip += sb.length();
                 if ("容器远程回滚成功".equals(line) || "远程端口已被占用".equals(line) ||
                         "容器远程部署成功".equals(line) || "容器远程部署失败".equals(line) ||
                         "远程服务器连接失败".equals(line) || "镜像拉取失败".equals(line) ||

@@ -2,64 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f9f0686-dcd6-41a9-bcc9-c430b437afb9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../easyci.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/install.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/sh/Dockerfile-java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/sh/Dockerfile-vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/sh/auto_build.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/sh/auto_destroy.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/sh/auto_rollback.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/sh/easy_ci.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/sh/gitlab_token.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/sh/isExitFile.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/sh/sendmail.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/startEasyCi.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/stopEasyCi.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/ci-0.0.1-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/css/app.06d82845.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/css/app.1d4b1252.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/css/app.28136c98.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/css/app.2e051bbf.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/css/app.6a49464e.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/css/app.6b94e327.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/css/app.82e9d1ac.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/css/app.98f5e50a.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/css/app.a976198c.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/css/app.d4c67133.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/css/app.e72c2a44.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/css/chunk-vendors.728eb7d9.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/fonts/element-icons.535877f5.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/fonts/element-icons.732389de.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.07215f97.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.07215f97.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.15b43679.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.15b43679.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.3398c21b.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.3398c21b.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.6d121af5.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.6d121af5.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.7bc5011d.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.7bc5011d.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.8e07e5a2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.8e07e5a2.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.cbd6f3b9.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.cbd6f3b9.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.db29894c.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.db29894c.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.e4355178.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.e4355178.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.f7d8fd25.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.f7d8fd25.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.f93855d7.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.f93855d7.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.fee9dcbc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/app.fee9dcbc.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/chunk-vendors.f3000b8e.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/dist/js/chunk-vendors.f3000b8e.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/easy-ci.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shell/work/nginx.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/easyci/ci/service/impl/DockerLogsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/easyci/ci/service/impl/DockerLogsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easyci-ui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../easyci-ui/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -76,41 +22,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/SequenceMapper.xml">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/service/DockerServerService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/service/impl/DockerContainerServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="75" column="43" selection-start-line="75" selection-start-column="37" selection-end-line="75" selection-end-column="43" />
+            <state relative-caret-position="108">
+              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/CiApplication.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/service/DockerContainerService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="12" selection-start-line="12" selection-end-line="14" selection-end-column="5" />
-              <folding>
-                <element signature="e#431#432#0" expanded="true" />
-                <element signature="e#495#496#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="108">
+              <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/service/impl/DockerRemoteServiceImpl.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/service/DockerLogsService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+            <state relative-caret-position="180">
+              <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -124,11 +57,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/service/impl/DockerLogsServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+            <state relative-caret-position="132">
+              <caret line="74" column="32" selection-start-line="74" selection-start-column="32" selection-end-line="74" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -147,6 +83,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="432">
               <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/controller/ContainerController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="130" column="39" selection-start-line="130" selection-start-column="39" selection-end-line="130" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -179,6 +124,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/easyci/ci/socket/WebSocketServer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/easyci/ci/controller/ContainerController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/easyci/ci/service/impl/DockerLogsServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -190,6 +137,27 @@
         <option name="userSettingsFile" value="D:\apache-maven-3.6.1\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="ci" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="ci" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
   </component>
   <component name="ProjectConfigurationFiles">
     <option name="files">
@@ -321,8 +289,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="width" value="1920" />
     <option name="height" value="1080" />
   </component>
@@ -332,8 +299,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -494,9 +459,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
@@ -553,17 +521,18 @@
       <workItem from="1573004677668" duration="66000" />
       <workItem from="1573093918414" duration="617000" />
       <workItem from="1573786242923" duration="19000" />
+      <workItem from="1574826876976" duration="157000" />
+      <workItem from="1574827086770" duration="1372000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5586000" />
+    <option name="totallyTimeSpent" value="7115000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25799572" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25746268" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -573,7 +542,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32939914" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -588,7 +557,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Maven" order="3" weight="0.32995737" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="right" id="Database" order="6" />
@@ -639,6 +608,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/SequenceMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/CiApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
@@ -657,6 +633,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/service/impl/DockerContainerServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1188">
+          <caret line="75" column="43" selection-start-line="75" selection-start-column="37" selection-end-line="75" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/service/DockerServerService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/service/DockerContainerService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/service/impl/DockerServerServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -664,24 +661,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/service/impl/DockerLogsServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/entity/ResponseResult.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/controller/ServerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -699,17 +682,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/SequenceMapper.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/controller/ServerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
+        <state relative-caret-position="432">
+          <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/service/impl/DockerContainerServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/controller/ContainerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="75" column="43" selection-start-line="75" selection-start-column="37" selection-end-line="75" selection-end-column="43" />
+        <state relative-caret-position="594">
+          <caret line="130" column="39" selection-start-line="130" selection-start-column="39" selection-end-line="130" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/service/DockerLogsService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/easyci/ci/service/impl/DockerLogsServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="74" column="32" selection-start-line="74" selection-start-column="32" selection-end-line="74" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
