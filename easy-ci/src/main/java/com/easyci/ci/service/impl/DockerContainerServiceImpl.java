@@ -266,7 +266,7 @@ public class DockerContainerServiceImpl implements DockerContainerService {
                     GitlabAPI gitlabAPI = GitlabAPI.connect(gitlabToken.getGiturl(),gitlabToken.getAccess_token(), TokenType.ACCESS_TOKEN);
                     List<GitlabProject> gitlabProjects = gitlabAPI.getProjects();
                     for (GitlabProject gitlabProject:gitlabProjects){
-                        if (gitlabProject.getName().equals(container_name)){
+                        if (gitlabProject.getName().toLowerCase().equals(container_name)){
                             String webhook = "http://" + this.serverConfig.getIpAdd() + ":" + this.serverConfig.getPort() + "/gitlab/hook";
                             List<GitlabProjectHook> gitlabProjectHooks = gitlabAPI.getProjectHooks(gitlabProject.getId());
                             if (gitlabProjectHooks.size() > 0){
