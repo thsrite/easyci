@@ -13,6 +13,7 @@ import com.easyci.ci.service.GitlabTokenService;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,6 +62,17 @@ public class GitlabController {
         }
     }
 
+    public static void main(String[] args) {
+        GitlabAPI connect = null;
+        try {
+            connect = GitlabAPI.connect("http://192.168.8.10", "92b713c90f59cacbbfe7ad4038e8bd6f1a0da47cbef1bf00c79561927a3f6c7c", TokenType.ACCESS_TOKEN);
+            List<GitlabProject> projects = connect.getProjects();
+            System.out.println(projects.get(0).getLastActivityAt());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @Author jxd
      * @Description gitlab自动触发构建
@@ -85,6 +97,8 @@ public class GitlabController {
                 if (deploys.size() > 0){
                     for (ContainerDeploy containerDeploy:deploys){
                         System.out.println(containerDeploy);
+                        if (StringUtils.isEmpty(containerDeploy.getMails()))
+                            containerDeploy.setMails("admin@mingbyte.com");
                         dockerContainerService.easyci(git_http_url,containerDeploy.getPorts(),containerDeploy.getLanguage(),containerDeploy.getMails(),containerDeploy.getDeploy_ip(),"build",null);
                     }
                 }
