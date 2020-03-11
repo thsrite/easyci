@@ -339,7 +339,7 @@ public class DockerContainerServiceImpl implements DockerContainerService {
                         dockerLogsService.rmBuildLog(container_name,dockerServer.getServer_ip());
                         sequenceMapper.deleteByPrimaryKey(sequenceName);
                         dockerLogsMapper.deleteBy(container_name,dockerServer.getServer_ip());
-                        containerDeployMapper.deleteBy(container_name,dockerServer.getServer_ip());
+                        //containerDeployMapper.deleteBy(container_name,dockerServer.getServer_ip());
                         return new ResponseResult(false,500,"拉取代码失败",null);
                     }
                 }
@@ -357,7 +357,7 @@ public class DockerContainerServiceImpl implements DockerContainerService {
                         dockerLogsService.rmBuildLog(container_name,dockerServer.getServer_ip());
                         sequenceMapper.deleteByPrimaryKey(sequenceName);
                         dockerLogsMapper.deleteBy(container_name,dockerServer.getServer_ip());
-                        containerDeployMapper.deleteBy(container_name,dockerServer.getServer_ip());
+                        //containerDeployMapper.deleteBy(container_name,dockerServer.getServer_ip());
                         return new ResponseResult(false,500,line,null);
                 }
             }
@@ -485,7 +485,7 @@ public class DockerContainerServiceImpl implements DockerContainerService {
                                 dockerLogsService.rmBuildLog(container_name,server_ip);
                                 sequenceMapper.deleteByPrimaryKey(sequenceName);
                                 dockerLogsMapper.deleteBy(container_name,server_ip);
-                                containerDeployMapper.deleteBy(container_name,server_ip);
+                                //containerDeployMapper.deleteBy(container_name,server_ip);
                             }
                             return new ResponseResult(true,200,"容器" + container_name + desc +"成功",null);
                         }
