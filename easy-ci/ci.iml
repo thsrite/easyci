@@ -83,7 +83,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.1.9.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:5.1.9.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.6.3" level="project" />
-    <orderEntry type="library" name="Maven: ch.ethz.ganymed:ganymed-ssh2:build210" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-configuration-processor:2.1.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20170516" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
@@ -143,5 +142,6 @@
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.11.2" level="project" />
     <orderEntry type="library" name="Maven: org.elasticsearch:jna:4.5.1" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.58" level="project" />
+    <orderEntry type="library" name="Maven: ch.ethz.ganymed:ganymed-ssh2:build210" level="project" />
   </component>
 </module>
