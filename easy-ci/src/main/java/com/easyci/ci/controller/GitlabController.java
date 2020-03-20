@@ -38,27 +38,27 @@ public class GitlabController {
     private DockerContainerService dockerContainerService;
 
     /**
+     * @return com.easyci.ci.entity.ResponseResult
      * @Author jxd
      * @Description 获取所有gitlab仓库
      * @Date 13:45 2019/9/30
      * @Param []
-     * @return com.easyci.ci.entity.ResponseResult
      **/
     @PostMapping("projects")
     public ResponseResult getGitlabProJects() {
         GitlabToken gitlabToken = gitlabTokenMapper.select();
-        if (gitlabToken != null){
+        if (gitlabToken != null) {
             GitlabAPI connect = null;
             try {
                 connect = GitlabAPI.connect(gitlabToken.getGiturl(), gitlabToken.getAccess_token(), TokenType.ACCESS_TOKEN);
                 List<GitlabProject> projects = connect.getProjects();
-                return new ResponseResult(true,200,"获取成功",projects);
+                return new ResponseResult(true, 200, "获取成功", projects);
             } catch (IOException e) {
                 e.printStackTrace();
-                return new ResponseResult(false,500,"获取失败",e);
+                return new ResponseResult(false, 500, "获取失败", e);
             }
-        }else {
-            return new ResponseResult(false,500,"请设置系统信息",null);
+        } else {
+            return new ResponseResult(false, 500, "请设置系统信息", null);
         }
     }
 
@@ -74,11 +74,11 @@ public class GitlabController {
     }
 
     /**
+     * @return void
      * @Author jxd
      * @Description gitlab自动触发构建
      * @Date 12:31 2019/9/30
      * @Param [request]
-     * @return void
      **/
     @PostMapping("hook")
     public void gitlabhook(HttpServletRequest request) {
@@ -89,17 +89,22 @@ public class GitlabController {
             while ((str = br.readLine()) != null) {
                 JSONObject jo = new JSONObject((str));
 //                String git_url = jo.getJSONObject("repository").getString("url");
-                String git_http_url = jo.getJSONObject("repository").getString("git_http_url");
+                //master分支才发布
+                String ref = (String) jo.get("ref");
+                System.out.println(ref);
+                if (ref.equals("refs/heads/master")) {
+                    String git_http_url = jo.getJSONObject("repository").getString("git_http_url");
 //                System.out.println(git_url);
-                String project_name = jo.getJSONObject("repository").getString("name");
+                    String project_name = jo.getJSONObject("repository").getString("name");
 //                String project_id = jo.getJSONObject("project").getString("id");
-                List<ContainerDeploy> deploys = containerDeployMapper.selectByConName(project_name);
-                if (deploys.size() > 0){
-                    for (ContainerDeploy containerDeploy:deploys){
-                        System.out.println(containerDeploy);
-                        if (StringUtils.isEmpty(containerDeploy.getMails()))
-                            containerDeploy.setMails("admin@mingbyte.com");
-                        dockerContainerService.easyci(git_http_url,containerDeploy.getPorts(),containerDeploy.getLanguage(),containerDeploy.getMails(),containerDeploy.getDeploy_ip(),"build",null);
+                    List<ContainerDeploy> deploys = containerDeployMapper.selectByConName(project_name);
+                    if (deploys.size() > 0) {
+                        for (ContainerDeploy containerDeploy : deploys) {
+                            System.out.println(containerDeploy);
+                            if (StringUtils.isEmpty(containerDeploy.getMails()))
+                                containerDeploy.setMails("admin@mingbyte.com");
+                            dockerContainerService.easyci(git_http_url, containerDeploy.getPorts(), containerDeploy.getLanguage(), containerDeploy.getMails(), containerDeploy.getDeploy_ip(), "build", null);
+                        }
                     }
                 }
             }
@@ -118,43 +123,43 @@ public class GitlabController {
     }
 
     /**
+     * @return com.easyci.ci.entity.ResponseResult
      * @Author jxd
      * @Description 登录验证gitlab，获得密钥
      * @Date 13:45 2019/10/12
      * @Param [username, password]
-     * @return com.easyci.ci.entity.ResponseResult
      **/
     @PostMapping("login")
-    public ResponseResult gitlabLogin(String githost, String username,String password) {
+    public ResponseResult gitlabLogin(String githost, String username, String password) {
         GitlabToken gitlabToken = gitlabTokenService.selectByUsername(username);
-        ResponseResult r = gitlabTokenService.getAccessToken("http://" + githost,username,password);
-        if (r.getStatus()){
+        ResponseResult r = gitlabTokenService.getAccessToken("http://" + githost, username, password);
+        if (r.getStatus()) {
             GitlabToken gitlabToken1 = new GitlabToken();
             gitlabToken1.setGiturl("http://" + githost);
             gitlabToken1.setUsername(username);
             gitlabToken1.setPassword(password);
             gitlabToken1.setAccess_token(String.valueOf(r.getList()));
-            if (gitlabToken == null){
-                if (gitlabTokenMapper.insertSelective(gitlabToken1) > 0){
-                    return new ResponseResult(true,200,"登陆成功",null);
-                }else {
-                    return new ResponseResult(false,500,"登陆失败",null);
+            if (gitlabToken == null) {
+                if (gitlabTokenMapper.insertSelective(gitlabToken1) > 0) {
+                    return new ResponseResult(true, 200, "登陆成功", null);
+                } else {
+                    return new ResponseResult(false, 500, "登陆失败", null);
                 }
-            }else {
+            } else {
                 gitlabTokenMapper.updateByPrimaryKeySelective(gitlabToken1);
-                return new ResponseResult(true,200,"登录成功",null);
+                return new ResponseResult(true, 200, "登录成功", null);
             }
-        }else {
-            return new ResponseResult(false,500,r.getErrorDesc(),null);
+        } else {
+            return new ResponseResult(false, 500, r.getErrorDesc(), null);
         }
     }
 
     /**
+     * @return
      * @Author jxd
      * @Description 验证是否设置配置信息
      * @Date 11:35 2019/10/12
      * @Param
-     * @return
      **/
     @PostMapping("isSet")
     public ResponseResult IsSetSystemSetting() {
