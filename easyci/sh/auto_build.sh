@@ -55,6 +55,7 @@ if [[ $PROJECT_LANG = java ]];then
 	cp $EASY_CI_HOME/Dockerfile-java .
 	mv Dockerfile-java Dockerfile
 	echo '========================mvn清理开始========================'
+	source /etc/profile
 	mvn clean
 	echo '========================mvn清理结束========================'
 	

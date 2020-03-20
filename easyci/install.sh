@@ -52,11 +52,11 @@ echo '验证git'
 git --version
 
 echo '7.安装maven'
-wget http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
+wget https://mirror.bit.edu.cn/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
 echo 'maven解压'
-tar -zxvf apache-maven-3.6.1-bin.tar.gz -C /home
+tar -zxvf apache-maven-3.6.3-bin.tar.gz -C /home
 echo 'maven重命名'
-mv /home/apache-maven-3.6.1 /home/maven
+mv /home/apache-maven-3.6.3 /home/maven
 echo '设置maven环境变量'
 echo 'export MAVEN_HOME=/home/maven
 export PATH=$MAVEN_HOME/bin:$PATH' >> /etc/profile

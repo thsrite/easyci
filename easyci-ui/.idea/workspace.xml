@@ -3,9 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="aef278e2-86ff-4edf-909d-c8eaaecb9994" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../easy-ci/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../easy-ci/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../easy-ci/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../easy-ci/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../easy-ci/src/main/java/com/easyci/ci/service/impl/DockerLogsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../easy-ci/src/main/java/com/easyci/ci/service/impl/DockerLogsServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-vendors.49530483.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-vendors.49530483.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easyci/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../easyci/install.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easyci/work/ci-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../easyci/work/ci-0.0.1-SNAPSHOT.jar" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -26,8 +29,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/views/Easyci.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="110" column="49" selection-start-line="110" selection-start-column="38" selection-end-line="110" selection-end-column="49" />
+            <state relative-caret-position="297">
+              <caret line="711" column="50" selection-start-line="711" selection-start-column="50" selection-end-line="711" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -103,11 +106,6 @@
             <path>
               <item name="easyci-ui" type="b2602c69:ProjectViewProjectNode" />
               <item name="easyci-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="easyci-ui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="easyci-ui" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -133,7 +131,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="D:/WorkSpace/photoWeb" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -174,11 +172,15 @@
       <workItem from="1574827056952" duration="1758000" />
       <workItem from="1574832330347" duration="3000" />
       <workItem from="1574906752815" duration="656000" />
+      <workItem from="1576719677923" duration="971000" />
+      <workItem from="1577063860972" duration="4000" />
+      <workItem from="1584407864589" duration="265000" />
+      <workItem from="1584507654229" duration="51000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6418000" />
+    <option name="totallyTimeSpent" value="7709000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -191,9 +193,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -207,7 +208,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32939914" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.2746781" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.27360514" />
       <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -249,8 +250,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/views/Easyci.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="110" column="49" selection-start-line="110" selection-start-column="38" selection-end-line="110" selection-end-column="49" />
+        <state relative-caret-position="297">
+          <caret line="711" column="50" selection-start-line="711" selection-start-column="50" selection-end-line="711" selection-end-column="50" />
         </state>
       </provider>
     </entry>
