@@ -15,9 +15,9 @@
 
         <!-- 数据库链接URL、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://mysql.mingbyte.com:3306/easy-ci"
+                        connectionURL="jdbc:mysql://localhost:3306/easy-ci"
                         userId="root"
-                        password="Mingbyte@123">
+                        password="123456">
         </jdbcConnection>
 
         <!--

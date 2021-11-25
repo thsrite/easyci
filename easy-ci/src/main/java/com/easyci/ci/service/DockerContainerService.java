@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface DockerContainerService {
 
-   /* 
-    * @Author jiangxd 
-    * @Description 初始化获取所有已添加服务器的容器列表
-    * @Date 18:59 2019-10-05 
-    * @Param  
-    * @return  
-   **/
+    /*
+     * @Author jiangxd
+     * @Description 初始化获取所有已添加服务器的容器列表
+     * @Date 18:59 2019-10-05
+     * @Param
+     * @return
+     **/
     ResponseResult getAllDockerPs();
 
     /*
@@ -26,31 +26,31 @@ public interface DockerContainerService {
      **/
     List<DockerContainer> localDockerPs();
 
-    /* 
-     * @Author jiangxd 
-     * @Description 根据服务器信息查询该服务器的dockerps 
-     * @Date 19:08 2019-10-05 
-     * @Param  
-     * @return  
-    **/
+    /*
+     * @Author jiangxd
+     * @Description 根据服务器信息查询该服务器的dockerps
+     * @Date 19:08 2019-10-05
+     * @Param
+     * @return
+     **/
     List<DockerContainer> getDockerPs(String hostName, String username, String password, Integer port);
 
-    /* 
-     * @Author jiangxd 
+    /*
+     * @Author jiangxd
      * @Description 根据deploy_way选择本地部署或者远程部署,根据buildOrLogs选择功能类型
-     * @Date 20:11 2019-10-05 
-     * @Param  buildOrLogs: build,logs
-     * @return  
-    **/
-    ResponseResult easyci(String giturl, String ports, String language, String mails, String deploy_way, String buildOrLogs,Integer start);
+     * @Date 20:11 2019-10-05
+     * @Param buildOrLogs: build,logs
+     * @return
+     **/
+    ResponseResult easyci(String giturl, String ports, String language, String mails, String deploy_way, String buildOrLogs, Integer start);
 
-    /* 
-     * @Author jiangxd 
-     * @Description 接受参数执行脚本部署 
-     * @Date 11:27 2019-10-08 
-     * @Param  
-     * @return  
-    **/
+    /*
+     * @Author jiangxd
+     * @Description 接受参数执行脚本部署
+     * @Date 11:27 2019-10-08
+     * @Param
+     * @return
+     **/
     ResponseResult build(String giturl, String ports, String language, String mails, DockerServer dockerServer);
 
     /*
@@ -60,7 +60,7 @@ public interface DockerContainerService {
      * @Param
      * @return
      **/
-     ResponseResult killBuild(String grepstring);
+    ResponseResult killBuild(String grepstring);
 
     /*
      * @Author jxd
@@ -69,6 +69,6 @@ public interface DockerContainerService {
      * @Param
      * @return
      **/
-    ResponseResult dockerExec(String container_name,String server_ip,String cmd);
+    ResponseResult dockerExec(String container_name, String server_ip, String cmd);
 
 }

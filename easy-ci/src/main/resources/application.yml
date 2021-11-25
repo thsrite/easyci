@@ -31,9 +31,9 @@ spring:
         # 数据源-1，名称为 primary
         primary:
           username: root
-          password: Mingbyte@123
+          password: 123456
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://mysql.mingbyte.com:3306/easy-ci?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+          url: jdbc:mysql://localhost:3306/easy-ci?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 #        primary:
 #          username: root
 #          password: 123456

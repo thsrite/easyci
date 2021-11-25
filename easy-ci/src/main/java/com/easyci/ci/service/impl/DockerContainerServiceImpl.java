@@ -54,9 +54,10 @@ public class DockerContainerServiceImpl implements DockerContainerService {
     @Autowired
     private ServerConfig serverConfig;
 
+
     @Override
     public List<DockerContainer> getDockerPs(String hostName, String username, String password, Integer port) {
-        Connection con = null;
+        Connection con;
         if (hostName == null || "".equals(hostName)){
             return null;
         }else {
@@ -64,7 +65,7 @@ public class DockerContainerServiceImpl implements DockerContainerService {
                 con = ConnectUtil.getConnect(hostName, username, password, port);
                 List<DockerContainer> list = new ArrayList<>();
                 if (con != null) {
-                    Session ss = null;
+                    Session ss;
                     try {
                         ss = con.openSession();
                         ss.execCommand("docker ps -a");
