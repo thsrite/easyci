@@ -19,36 +19,36 @@ public class ServerController {
     private DockerServerService dockerServerService;
 
 
-    /** 
-     * @Author jiangxd 
+    /**
+     * @Author jiangxd
      * @Description 用于查询服务器的容器列表
-     * @Date 13:21 2019-10-01 
-     * @Param [] 
-     * @return com.easyci.ci.entity.ResponseResult 
+     * @Date 13:21 2019-10-01
+     * @Param []
+     * @return com.easyci.ci.entity.ResponseResult
     **/
     @GetMapping("searchServerList")
     public ResponseResult getSearchServerList(){
         return dockerServerService.selectSearchServer();
     }
 
-    /** 
-     * @Author jiangxd 
+    /**
+     * @Author jiangxd
      * @Description 用于可进行部署的服务器列表
-     * @Date 13:21 2019-10-01 
-     * @Param [] 
-     * @return com.easyci.ci.entity.ResponseResult 
+     * @Date 13:21 2019-10-01
+     * @Param []
+     * @return com.easyci.ci.entity.ResponseResult
      **/
     @GetMapping("deployServerList")
     public ResponseResult getDeployServerList(){
         return dockerServerService.selectDeployServer();
     }
 
-    /** 
-     * @Author jiangxd 
-     * @Description 新增服务器 
-     * @Date 13:22 2019-10-01 
-     * @Param [dockerServer] 
-     * @return com.easyci.ci.entity.ResponseResult 
+    /**
+     * @Author jiangxd
+     * @Description 新增服务器
+     * @Date 13:22 2019-10-01
+     * @Param [dockerServer]
+     * @return com.easyci.ci.entity.ResponseResult
     **/
     @PostMapping("add")
     public ResponseResult insertServer(DockerServer dockerServer){

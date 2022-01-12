@@ -59,12 +59,12 @@ public class ContainerController {
         }
     }
 
-    /** 
-     * @Author jiangxd 
-     * @Description 根据选择的服务器ip查询dockerps列表 
-     * @Date 18:36 2019-10-05 
-     * @Param [serverip] 
-     * @return com.easyci.ci.entity.ResponseResult 
+    /**
+     * @Author jiangxd
+     * @Description 根据选择的服务器ip查询dockerps列表
+     * @Date 18:36 2019-10-05
+     * @Param [serverip]
+     * @return com.easyci.ci.entity.ResponseResult
     **/
     @PostMapping("oneps")
     public ResponseResult getOneDockerPs(@NonNull Integer serverid){
@@ -107,12 +107,12 @@ public class ContainerController {
         return dockerContainerService.killBuild(giturl);
     }
 
-    /** 
-     * @Author jiangxd 
-     * @Description 查看容器部署日志 
-     * @Date 13:52 2019-10-08 
-     * @Param  
-     * @return  
+    /**
+     * @Author jiangxd
+     * @Description 查看容器部署日志
+     * @Date 13:52 2019-10-08
+     * @Param
+     * @return
     **/
     @PostMapping("deployLogs")
     public ResponseResult getDeployLogs(String giturl,String deploy_way,Integer start){
